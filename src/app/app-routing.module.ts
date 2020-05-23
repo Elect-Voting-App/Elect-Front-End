@@ -4,7 +4,7 @@ import { LoginComponent } from './admin/login/login.component';
 
 //All Routes in the Application
 const routes: Routes = [
-  { path: '/admin/login', component: LoginComponent}
+  { path: '', component: LoginComponent }
 ];
 
 @NgModule({

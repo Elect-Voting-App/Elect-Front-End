@@ -1,0 +1,46 @@
+#wrapper {
+  height: 100%;
+  min-height: 100%;
+  width: 100%;
+  background-image: url('/assets/admin/background.jpg');
+  background-repeat: no-repeat;
+  padding-top: 4.2rem;
+  padding-bottom: 4.2rem;
+}
+
+a {
+  text-decoration: none !important;
+}
+
+h1, h2, h3 {
+  font-family: 'Kaushan Script', cursive;
+}
+
+.myform {
+  position: relative;
+  display: -ms-flexbox;
+  display: flex;
+  padding: 1rem;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  width: 100%;
+  pointer-events: auto;
+  background-color: #fff;
+  background-clip: padding-box;
+  border: 1px solid rgba(0, 0, 0, .2);
+  border-radius: 1.1rem;
+  outline: 0;
+  max-width: 500px;
+}
+
+.mybtn {
+  border-radius: 50px;
+}
+
+.logo {
+  border: 1px solid black;
+  border-radius: 50%;
+  
+}
+
+/* RESPONSIVE SYLING */
