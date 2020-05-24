@@ -3,17 +3,13 @@
   min-height: 100%;
   width: 100%;
   background-image: url('/assets/admin/background.jpg');
-  background-repeat: no-repeat;
-  padding-top: 4.2rem;
-  padding-bottom: 4.2rem;
+  background-repeat: round;
+  padding-top: 6.2rem;
+  padding-bottom: 6.2rem;
 }
 
 a {
   text-decoration: none !important;
-}
-
-h1, h2, h3 {
-  font-family: 'Kaushan Script', cursive;
 }
 
 .myform {
@@ -35,12 +31,14 @@ h1, h2, h3 {
 
 .mybtn {
   border-radius: 50px;
+  background-color: #009afe;
 }
 
 .logo {
   border: 1px solid black;
   border-radius: 50%;
-  
+  width: 150px;
+  height: 150px;
 }
 
 /* RESPONSIVE SYLING */
