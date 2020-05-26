@@ -28,7 +28,7 @@
               </div>
             </div>
             <div class="col-md-12 text-center">
-              <button type="submit" class="btn btn-block mybtn btn-primary text-uppercase">Login</button>
+              <button [disabled]="!loginForm.valid" type="submit" class="btn btn-block mybtn btn-primary text-uppercase">Login</button>
             </div>
           </form>
         </div>

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+import { LoginService } from '../shared/services/login.service';
 
 @Component({
   selector: 'app-login',
@@ -17,7 +18,7 @@ export class LoginComponent implements OnInit {
     return this.loginForm.get('password');
   }
 
-  constructor(private login: FormBuilder) {}
+  constructor(private login: FormBuilder, private loginService: LoginService) {}
 
   ngOnInit(): void {
   }
@@ -30,6 +31,11 @@ export class LoginComponent implements OnInit {
 
   onSubmit() {
     console.log(this.loginForm.value);
+    this.loginService.login(this.loginForm.value)
+    .subscribe(
+      response => console.log(response),
+      error => console.error('Error', error)
+    );
   }
 
 }
