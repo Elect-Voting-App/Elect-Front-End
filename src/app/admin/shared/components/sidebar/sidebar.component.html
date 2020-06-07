@@ -1,0 +1,25 @@
+<!-- Profile -->
+<mat-nav-list>
+  <div class="profile-card">
+    <img src="assets/img/logo.jpg" alt="Profile Image">
+    <div class="header">
+      <h2>{{ name }}</h2>
+      <h4>{{ email }}</h4>
+    </div>
+  </div>
+
+  <mat-divider></mat-divider>
+
+  <a mat-list-item routerLinkActive="list-item-active" routerLink="/admin">Dashboard</a>
+  <div *ngIf="checkAdminStatus()">
+    <mat-divider></mat-divider>
+    <span matSubheader>Admin</span>
+    <a mat-list-item routerLinkActive="list-item-active" routerLink="/admin/register-admin">Register Administrator</a>
+    <a mat-list-item routerLinkActive="list-item-active" routerLink="/admin">Remove Admin</a>
+  </div>
+
+  <mat-divider></mat-divider>
+
+
+
+</mat-nav-list>

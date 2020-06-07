@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { LoginService } from '../shared/services/login.service';
+import { AuthService } from '../shared/services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -18,7 +19,7 @@ export class LoginComponent implements OnInit {
     return this.loginForm.get('password');
   }
 
-  constructor(private login: FormBuilder, private loginService: LoginService) {}
+  constructor(private login: FormBuilder, private authService: AuthService, private router: Router) {}
 
   ngOnInit(): void {
   }
@@ -30,10 +31,13 @@ export class LoginComponent implements OnInit {
   });
 
   onSubmit() {
-    console.log(this.loginForm.value);
-    this.loginService.login(this.loginForm.value)
+    this.authService.login(this.loginForm.value)
     .subscribe(
-      response => console.log(response),
+      success => {
+        if (success) {
+          this.router.navigate(['admin']);
+        }
+      },
       error => console.error('Error', error)
     );
   }
