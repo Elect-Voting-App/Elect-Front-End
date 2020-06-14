@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { PasswordGenerator } from '../../../shared/password-generator';
+import { AdminService } from '../../shared/services/admin.service';
 
 @Component({
   selector: 'app-register-admin',
@@ -30,7 +31,7 @@ export class RegisterAdminComponent implements OnInit {
     return this.registerAdmin.get('role');
   }
 
-  constructor(private formBuilder: FormBuilder) { }
+  constructor(private formBuilder: FormBuilder, private adminService: AdminService) { }
 
   ngOnInit(): void {
     console.log(this.generatedPassword);
@@ -52,6 +53,16 @@ export class RegisterAdminComponent implements OnInit {
   });
 
   onSubmit() {
-    console.log(this.registerAdmin.value)
+    this.adminService.register(this.registerAdmin.value)
+    .subscribe(
+      success => {
+          if (success.status) {
+            console.log('Successfull', success);
+          } else {
+            console.log(success);
+          }
+      },
+      error => console.error('Error', error)
+    );
   }
 }

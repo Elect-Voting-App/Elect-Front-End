@@ -21,7 +21,7 @@ export class AuthService {
   login(loginData): Observable<boolean> {
     return this._http.post<any>(`${config.adminApiUrl}/login`, loginData)
     .pipe(
-      tap(tokens => this.doLoginUser(tokens),),
+      tap(tokens => this.doLoginUser(tokens)),
       mapTo(true),
       catchError(error => {
         alert(error.error);
@@ -56,6 +56,13 @@ export class AuthService {
     return user;
   }
 
+  refreshToken() {
+    return this._http.post<any>(`${config.adminApiUrl}/refresh`, {
+      'refreshToken': this.getRefreshToken()
+    }).pipe(tap((tokens: Tokens) => {
+      this.storeJwtToken(tokens.jwt);
+    }));
+  }
 
   //Private Method to take tokens and do login
   private doLoginUser(tokens: Tokens) {
@@ -87,6 +94,11 @@ export class AuthService {
   //Getting refresh token
   private getRefreshToken() {
     return localStorage.getItem(this.REFRESH_TOKEN);
+  }
+
+  //store JWT Token
+  private storeJwtToken(jwt: string) {
+    localStorage.setItem(this.JWT_TOKEN, jwt);
   }
 
   //Removing tokens from localstorage
