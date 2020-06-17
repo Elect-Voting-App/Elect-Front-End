@@ -19,7 +19,7 @@ export class LoginComponent implements OnInit {
     return this.loginForm.get('password');
   }
 
-  constructor(private login: FormBuilder, private authService: AuthService, private router: Router) {}
+  constructor(private login: FormBuilder, private authService: AuthService, private router: Router) { }
 
   ngOnInit(): void {
   }
@@ -30,16 +30,29 @@ export class LoginComponent implements OnInit {
     password: ['', [Validators.required, Validators.minLength(6)]]
   });
 
+  hasError = false
+  hasErrorMessage: string;
+  
+  //checking for Failed Login
+  loginError() {
+    return this.hasError;
+  }
+
   onSubmit() {
     this.authService.login(this.loginForm.value)
-    .subscribe(
-      success => {
-        if (success) {
-          this.router.navigate(['admin']);
-        }
-      },
-      error => console.error('Error', error)
-    );
+      .subscribe(
+        success => {
+          if (success.status) {
+            this.authService.doLoginUser(success);
+            this.loginForm.reset();
+            this.router.navigate(['admin']);
+          } else {
+            this.hasError = true;
+            this.hasErrorMessage = success.message
+          }
+        },
+        error => console.error('Error', error)
+      );
   }
 
 }

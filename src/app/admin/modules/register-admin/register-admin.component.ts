@@ -14,7 +14,7 @@ export class RegisterAdminComponent implements OnInit {
   get firstname() {
     return this.registerAdmin.get('firstname');
   }
-  
+
   get lastname() {
     return this.registerAdmin.get('lastname');
   }
@@ -40,8 +40,8 @@ export class RegisterAdminComponent implements OnInit {
   //Declaring the generator
   generator = new PasswordGenerator();
   generatedPassword = this.generator.generate();
-  
-  
+
+
 
   //Creating the Form Model 
   registerAdmin = this.formBuilder.group({
@@ -52,17 +52,33 @@ export class RegisterAdminComponent implements OnInit {
     role: ['', [Validators.required]]
   });
 
+  //Declaring Variables
+  hasError= false;
+  hasSuccess =false;
+  hasErrorMessage: string;
+  hasSuccessMessage: string;
+
+  registerError() {
+    return this.hasError;
+  }
+  registerSuccess() {
+    return this.hasSuccess;
+  }
+
   onSubmit() {
     this.adminService.register(this.registerAdmin.value)
-    .subscribe(
-      success => {
+      .subscribe(
+        success => {
           if (success.status) {
-            console.log('Successfull', success);
+            this.hasSuccess = true;
+            this.hasSuccessMessage = success.message;
+            this.registerAdmin.reset();
           } else {
-            console.log(success);
+            this.hasError = true;
+            this.hasErrorMessage = success.message
           }
-      },
-      error => console.error('Error', error)
-    );
+        },
+        error => console.error('Error', error)
+      );
   }
 }

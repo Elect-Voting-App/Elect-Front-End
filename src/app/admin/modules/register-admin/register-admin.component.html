@@ -1,10 +1,16 @@
 <div class="mb-4 mt-3">
   <div class="col-md-12 text-center">
-    <img class="logo mx-auto" src="assets/img/logo.jpg">
+    <img class="logo mx-auto" src="assets/img/logo.png">
     <span class="d-block h1">ADMIN REGISTRATION</span>
   </div>
 </div>
 <form [formGroup]="registerAdmin" (ngSubmit)=onSubmit()>
+  <div *ngIf="registerError()">
+    <p class="alert alert-danger text-center"> {{hasErrorMessage}} </p>
+  </div>
+  <div *ngIf="registerSuccess()">
+    <p class="alert alert-success text-center"> {{hasSuccessMessage}} </p>
+  </div>
   <div class="form-label-group">
     <input type="text" name="firstname" class="form-control" id="inputFirstname" placeholder="Firstname" formControlName="firstname" required [class.is-invalid]="firstname.invalid && firstname.touched">
     <label for="inputFirstname">Firstname</label>

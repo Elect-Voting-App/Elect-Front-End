@@ -18,15 +18,8 @@ export class AuthService {
   constructor(private _http: HttpClient) { }
   
   //Login http post request to the server
-  login(loginData): Observable<boolean> {
-    return this._http.post<any>(`${config.adminApiUrl}/login`, loginData)
-    .pipe(
-      tap(tokens => this.doLoginUser(tokens)),
-      mapTo(true),
-      catchError(error => {
-        alert(error.error);
-          return of(false);
-      }));
+  login(loginData) {
+    return this._http.post<any>(`${config.adminApiUrl}/login`, loginData);
   }
 
   //Logout http post request to the server
@@ -65,7 +58,7 @@ export class AuthService {
   }
 
   //Private Method to take tokens and do login
-  private doLoginUser(tokens: Tokens) {
+  doLoginUser(tokens: Tokens) {
     this.storeTokens(tokens);
     this.storeUserInfo(tokens);
   }

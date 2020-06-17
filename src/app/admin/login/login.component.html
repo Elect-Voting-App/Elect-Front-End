@@ -6,6 +6,9 @@
         <div class="myform form">
           <div class="mb-4 mt-3">
             <div class="col-md-12 text-center">
+              <div *ngIf="loginError()">
+                <p class="alert alert-danger text-center">{{hasErrorMessage}}</p>
+              </div>
               <img class="logo mx-auto" src="assets/img/logo.jpg">
               <span class="d-inline navbar-brand brand h1">ADMIN LOGIN</span>
             </div>

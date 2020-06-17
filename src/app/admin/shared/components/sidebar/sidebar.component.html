@@ -1,7 +1,7 @@
 <!-- Profile -->
 <mat-nav-list>
   <div class="profile-card">
-    <img src="assets/img/logo.jpg" alt="Profile Image">
+    <img src="assets/img/logo.png" alt="Profile Image">
     <div class="header">
       <h2>{{ name }}</h2>
       <h4>{{ email }}</h4>
@@ -14,7 +14,7 @@
   <div *ngIf="checkAdminStatus()">
     <mat-divider></mat-divider>
     <span matSubheader>Admin</span>
-    <a mat-list-item routerLinkActive="list-item-active" routerLink="/admin/register-admin">Register Administrator</a>
+    <a mat-list-item routerLinkActive="list-item-active" routerLink="/admin/register-admin">Register Admin</a>
     <a mat-list-item routerLinkActive="list-item-active" routerLink="/admin">Remove Admin</a>
   </div>
 
