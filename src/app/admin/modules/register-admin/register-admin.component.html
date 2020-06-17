@@ -4,7 +4,7 @@
     <span class="d-block h1">ADMIN REGISTRATION</span>
   </div>
 </div>
-<form [formGroup]="registerAdmin" (ngSubmit)=onSubmit()>
+<form [formGroup]="registerAdmin" (ngSubmit)=onSubmit() autocomplete="off">
   <div *ngIf="registerError()">
     <p class="alert alert-danger text-center"> {{hasErrorMessage}} </p>
   </div>

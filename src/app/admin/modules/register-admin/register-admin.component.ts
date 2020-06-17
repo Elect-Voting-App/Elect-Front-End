@@ -73,6 +73,9 @@ export class RegisterAdminComponent implements OnInit {
             this.hasSuccess = true;
             this.hasSuccessMessage = success.message;
             this.registerAdmin.reset();
+            let newPass = this.generator.generate();
+            this.password.setValue(newPass);
+            console.log(newPass);
           } else {
             this.hasError = true;
             this.hasErrorMessage = success.message

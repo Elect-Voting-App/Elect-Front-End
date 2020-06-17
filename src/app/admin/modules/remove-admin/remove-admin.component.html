@@ -1,0 +1,39 @@
+<div class="mb-4 mt-3">
+  <div class="col-md-12 text-center">
+    <img class="logo mx-auto" src="assets/img/logo.png">
+    <span class="d-block h1">ADMIN DELETION</span>
+  </div>
+</div>
+
+<!-- Displaying error -->
+<div *ngIf="deleteError()">
+  <p class="alert alert-danger text-center"> {{hasErrorMessage}} </p>
+</div>
+<div *ngIf="deleteSuccess()">
+  <p class="alert alert-success text-center"> {{hasSuccessMessage}} </p>
+</div>
+
+<!-- Creating Table to hold all data -->
+<div class="table-responsive rounded text-center">
+  <table class="table table-bordered">
+    <thead class="thead-dark">
+      <tr>
+        <th scope="col"> Firstname </th>
+        <th scope="col"> Lastname </th>
+        <th scope="col"> Email </th>
+        <th scope="col"> Role </th>
+        <th scope="col"> Action </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let admin of Admins">
+        <td class="d-none"> <input type="number" #delID readonly value="{{admin.id}}"></td>
+        <td> {{ admin.firstname }} </td>
+        <td> {{ admin.lastname }} </td>
+        <td> {{ admin.email }} </td>
+        <td> {{ admin.role }} </td>
+        <td> <button mat-raised-button (click)="onDelete(delID.value)"> DELETE </button> </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

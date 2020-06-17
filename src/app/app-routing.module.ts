@@ -6,18 +6,20 @@ import { DashboardComponent } from './admin/modules/dashboard/dashboard.componen
 import { AuthGuard } from './admin/shared/guards/auth.guard';
 import { DashboardGuard } from './admin/shared/guards/dashboard.guard';
 import { RegisterAdminComponent } from './admin/modules/register-admin/register-admin.component';
+import { RemoveAdminComponent } from './admin/modules/remove-admin/remove-admin.component';
 
 //All Routes in the Application
 const routes: Routes = [
-  { path: 'admin/login', component: LoginComponent, canActivate: [AuthGuard]},
+  { path: 'admin/login', component: LoginComponent, canActivate: [AuthGuard] },
   {
     path: 'admin', component: DefaultComponent,
     children: [
       { path: '', component: DashboardComponent, canActivate: [DashboardGuard], canLoad: [DashboardGuard] },
-      { path: 'register-admin', component: RegisterAdminComponent  }
+      { path: 'register-admin', component: RegisterAdminComponent },
+      { path: 'remove-admin', component: RemoveAdminComponent }
     ]
   },
-  {path:'', pathMatch: 'full', redirectTo: '/admin'}
+  { path: '', pathMatch: 'full', redirectTo: '/admin' }
 ];
 
 @NgModule({

@@ -13,6 +13,8 @@ import { AuthGuard } from '../../shared/guards/auth.guard';
 import { AuthService } from '../../shared/services/auth.service';
 import { DashboardGuard } from '../../shared/guards/dashboard.guard';
 import { AdminService } from '../../shared/services/admin.service';
+import { RemoveAdminComponent } from '../../modules/remove-admin/remove-admin.component';
+import { MatButtonModule } from '@angular/material/button';
 
 
 
@@ -20,12 +22,15 @@ import { AdminService } from '../../shared/services/admin.service';
   declarations: [
     DefaultComponent,
     DashboardComponent,
-    RegisterAdminComponent],
+    RegisterAdminComponent,
+    RemoveAdminComponent
+  ],
   imports: [
     CommonModule,
     RouterModule,
     SharedModule,
     MatSidenavModule,
+    MatButtonModule,
     ReactiveFormsModule
   ],
   providers: [
