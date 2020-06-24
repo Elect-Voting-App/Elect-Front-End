@@ -43,7 +43,7 @@ export class ResetAdminPasswordComponent implements OnInit {
   loadingRequest() {
     return this.isLoading;
   }
-  
+
   matchFound() {
     return this.hasSuccess;
   }
@@ -51,49 +51,60 @@ export class ResetAdminPasswordComponent implements OnInit {
   //On Search 
   onSearch() {
     this.isLoading = true;
-   this.adminService.searchEmail(this.resetForm.value)
-   .subscribe(
-     success => {
-      if (success.status) {
-        this.hasSuccess = true;
-        this.hasSuccessMessage = 'Match Found';
-        this.isLoading = false;
-        this.Admins = success.data;
-        this.resetForm.reset();
-      } else {
-        this.isLoading = false;
-        this.hasError = true;
-        this.hasErrorMessage = success.message;
-      }
-     },
-     error => console.error('Error', error)
-   );
+    this.adminService.searchEmail(this.resetForm.value)
+      .subscribe(
+        success => {
+          if (success.status) {
+            this.hasSuccess = true;
+            this.hasSuccessMessage = 'Match Found';
+            this.isLoading = false;
+            this.Admins = success.data;
+            this.resetForm.reset();
+          } else {
+            this.isLoading = false;
+            this.hasError = true;
+            this.hasErrorMessage = success.message;
+          }
+        },
+        error => console.error('Error', error)
+      );
   }
 
   onReset(email) {
-    this.isLoading =true;
+    this.isLoading = true;
     //Declaring the generator
     let generator = new PasswordGenerator();
     let generatedPassword = generator.generate();
-    let requestValues = {email: email, password: generatedPassword }
+    let requestValues = { email: email, password: generatedPassword }
     console.log(requestValues);
     this.adminService.resetPassword(requestValues)
-    .subscribe(
-      success => {
-        if (success.status) {
-          //Send email to the user with the generated password
-          
-          this.isLoading = false;
-          this.hasSuccess = true;
-          this.hasSuccessMessage = success.message;
-        } else {
-          this.isLoading = false;
-          this.hasError = true;
-          this.hasErrorMessage = success.message;
-        }
-      },
-      error => console.log('Error ', error)
-    );
+      .subscribe(
+        success => {
+          if (success.status) {
+            //Send email to the user with the generated password
+            this.adminService.sendResetEmail(requestValues)
+              .subscribe(
+                success => {
+                  if (success.status) {
+                    this.isLoading = false;
+                    this.hasSuccess = true;
+                    this.hasSuccessMessage = success.message;
+                  } else {
+                    this.isLoading = false;
+                    this.hasError = true;
+                    this.hasErrorMessage = success.message;
+                  }
+                },
+                error => console.log('Error', error)
+              );
+          } else {
+            this.isLoading = false;
+            this.hasError = true;
+            this.hasErrorMessage = success.message;
+          }
+        },
+        error => console.log('Error ', error)
+      );
   }
 
 }

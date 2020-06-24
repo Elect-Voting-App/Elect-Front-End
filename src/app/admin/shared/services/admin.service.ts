@@ -39,4 +39,9 @@ export class AdminService {
     return this.http.put<any>(`${config.adminApiUrl}/update-pass`,adminData);
   }
 
+  //Sending Reset Email
+  sendResetEmail(adminData) {
+    return this.http.post<any>(`${config.adminMailerUrl}/update-pass`,adminData);
+  }
+
 }
