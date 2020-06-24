@@ -53,8 +53,9 @@ export class RegisterAdminComponent implements OnInit {
   });
 
   //Declaring Variables
-  hasError= false;
-  hasSuccess =false;
+  hasError = false;
+  hasSuccess = false;
+  isLoading = false;
   hasErrorMessage: string;
   hasSuccessMessage: string;
 
@@ -65,20 +66,40 @@ export class RegisterAdminComponent implements OnInit {
     return this.hasSuccess;
   }
 
+  loadingRequest() {
+    return this.isLoading;
+  }
+
   onSubmit() {
+    this.isLoading = true;
     this.adminService.register(this.registerAdmin.value)
       .subscribe(
         success => {
           if (success.status) {
-            this.hasSuccess = true;
-            this.hasSuccessMessage = success.message;
-            this.registerAdmin.reset();
-            let newPass = this.generator.generate();
-            this.password.setValue(newPass);
-            console.log(newPass);
+            //Sending Email after Success
+            this.adminService.sendEmail(this.registerAdmin.value)
+              .subscribe(
+                success => {
+                  if (success.status) {
+                    this.isLoading = false;
+                    this.hasSuccess = true;
+                    this.hasSuccessMessage = success.message;
+                    this.registerAdmin.reset();
+                    let newPass = this.generator.generate();
+                    this.password.setValue(newPass);
+                    console.log(newPass);
+                  } else {
+                    this.isLoading = false;
+                    this.hasError = true;
+                    this.hasErrorMessage = success.message;
+                  }
+                },
+                error => console.error('Error', error)
+              );
           } else {
+            this.isLoading = false;
             this.hasError = true;
-            this.hasErrorMessage = success.message
+            this.hasErrorMessage = success.message;
           }
         },
         error => console.error('Error', error)

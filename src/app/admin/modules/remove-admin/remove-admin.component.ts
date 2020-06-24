@@ -11,12 +11,15 @@ export class RemoveAdminComponent implements OnInit {
   constructor(private adminService: AdminService) { }
 
   ngOnInit(): void {
+    //Start loading animation
+    this.isLoading = true;
     this.allAdmins();
   }
 
   hasError: boolean;
   hasSuccess: boolean;
   Admins: any;
+  isLoading = false;
   hasErrorMessage: string;
   hasSuccessMessage: string;
   ID: number;
@@ -29,13 +32,19 @@ export class RemoveAdminComponent implements OnInit {
     return this.hasSuccess;
   }
 
+  loadingRequest() {
+    return this.isLoading;
+  }
+
   //getting All Admins
   allAdmins() {
     this.adminService.getAll().subscribe(
       success => {
         if (success.status) {
+          this.isLoading = false;
           this.Admins = success.data;
         } else {
+          this.isLoading = false;
           this.hasError = true;
           this.hasErrorMessage = success.message
         }
@@ -45,24 +54,24 @@ export class RemoveAdminComponent implements OnInit {
   }
 
   onDelete(id) {
-    console.log(typeof(id));
-    console.log(id);
+    this.isLoading = true;
     this.ID = parseInt(id);
-    console.log(typeof(this.ID));
     this.adminService.deleteAdmin(id)
-    .subscribe(
-      success => {
-        if (success.status) {
-          this.hasSuccess = true;
-          this.hasSuccessMessage = success.message;
-          this.allAdmins();
-        } else {
-          this.hasError = true;
-          this.hasErrorMessage = success.message
-        }
-      },
-      error => console.error('Error', error)
-    );
+      .subscribe(
+        success => {
+          if (success.status) {
+            this.isLoading = false;
+            this.hasSuccess = true;
+            this.hasSuccessMessage = success.message;
+            this.allAdmins();
+          } else {
+            this.isLoading = false;
+            this.hasError = true;
+            this.hasErrorMessage = success.message
+          }
+        },
+        error => console.error('Error', error)
+      );
   }
 
 }

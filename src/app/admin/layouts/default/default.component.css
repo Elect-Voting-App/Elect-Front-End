@@ -3,9 +3,6 @@ mat-drawer-container {
   flex-direction: column;
   height: 100%;
 }
-mat-drawer {
-  width: 300px;
-}
 
 mat-drawer-content {
   padding: 20px;

@@ -15,6 +15,10 @@ import { DashboardGuard } from '../../shared/guards/dashboard.guard';
 import { AdminService } from '../../shared/services/admin.service';
 import { RemoveAdminComponent } from '../../modules/remove-admin/remove-admin.component';
 import { MatButtonModule } from '@angular/material/button';
+import { FlexLayoutModule } from '@angular/flex-layout';
+import { MatCardModule } from '@angular/material/card';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { ResetAdminPasswordComponent } from '../../modules/reset-admin-password/reset-admin-password.component';
 
 
 
@@ -23,7 +27,8 @@ import { MatButtonModule } from '@angular/material/button';
     DefaultComponent,
     DashboardComponent,
     RegisterAdminComponent,
-    RemoveAdminComponent
+    RemoveAdminComponent,
+    ResetAdminPasswordComponent
   ],
   imports: [
     CommonModule,
@@ -31,7 +36,10 @@ import { MatButtonModule } from '@angular/material/button';
     SharedModule,
     MatSidenavModule,
     MatButtonModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    FlexLayoutModule,
+    MatCardModule,
+    MatProgressBarModule
   ],
   providers: [
     AuthGuard,

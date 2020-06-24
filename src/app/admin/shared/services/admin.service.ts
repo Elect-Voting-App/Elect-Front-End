@@ -1,8 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, of } from 'rxjs';
 import { config } from 'src/app/shared/config';
-import { tap, mapTo, catchError } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -21,8 +19,24 @@ export class AdminService {
     return this.http.get<any>(`${config.adminApiUrl}/all-admins`);
   }
 
+  //Deleting Admin
   deleteAdmin(id) {
     return this.http.delete<any>(`${config.adminApiUrl}/remove/${id}`);
+  }
+
+  //Sending Admin Email
+  sendEmail(adminData) {
+    return this.http.post<any>(`${config.adminMailerUrl}/admin`, adminData);
+  }
+
+  //Searching for admin Email
+  searchEmail(adminEmail) {
+    return this.http.post<any>(`${config.adminApiUrl}/search`, adminEmail);
+  }
+
+  //Update password
+  resetPassword(adminData) {
+    return this.http.put<any>(`${config.adminApiUrl}/update-pass`,adminData);
   }
 
 }

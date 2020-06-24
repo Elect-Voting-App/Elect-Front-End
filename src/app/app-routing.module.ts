@@ -7,6 +7,7 @@ import { AuthGuard } from './admin/shared/guards/auth.guard';
 import { DashboardGuard } from './admin/shared/guards/dashboard.guard';
 import { RegisterAdminComponent } from './admin/modules/register-admin/register-admin.component';
 import { RemoveAdminComponent } from './admin/modules/remove-admin/remove-admin.component';
+import { ResetAdminPasswordComponent } from './admin/modules/reset-admin-password/reset-admin-password.component';
 
 //All Routes in the Application
 const routes: Routes = [
@@ -16,7 +17,8 @@ const routes: Routes = [
     children: [
       { path: '', component: DashboardComponent, canActivate: [DashboardGuard], canLoad: [DashboardGuard] },
       { path: 'register-admin', component: RegisterAdminComponent },
-      { path: 'remove-admin', component: RemoveAdminComponent }
+      { path: 'remove-admin', component: RemoveAdminComponent },
+      { path: 'reset-admin-password', component: ResetAdminPasswordComponent }
     ]
   },
   { path: '', pathMatch: 'full', redirectTo: '/admin' }
