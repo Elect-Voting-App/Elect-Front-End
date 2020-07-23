@@ -9,6 +9,7 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DefaultModule } from './admin/layouts/default/default.module';
 import { AuthGuard } from './admin/shared/guards/auth.guard';
+import { NgxCsvParserModule } from 'ngx-csv-parser';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { AuthGuard } from './admin/shared/guards/auth.guard';
     ReactiveFormsModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    DefaultModule
+    DefaultModule,
+    NgxCsvParserModule
   ],
   providers: [AuthGuard],
   bootstrap: [AppComponent]

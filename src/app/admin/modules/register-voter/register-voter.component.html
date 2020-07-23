@@ -1,1 +1,49 @@
-<p>register-voter works!</p>
+<!-- Loading Progressbar -->
+<div *ngIf="loadingRequest()">
+  <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+</div>
+
+<!-- Main Page name with logo -->
+<div class="mb-4 mt-3">
+  <div class="col-md-12 text-center">
+    <img class="logo mx-auto" src="assets/img/logo.png">
+    <span class="d-block h1">REGISTER VOTERS</span>
+  </div>
+</div>
+
+<!-- Searching for CSV File -->
+<div class="search">
+  <div class="custom-file">
+    <input type="file" #fileImportInput name="file" class="custom-file-input form-control" id="inputFile"
+      placeholder="Import CSV file" (change)="fileChangeListener($event)">
+    <label class="custom-file-label" for="inputFile">Import CSV file</label>
+  </div>
+</div>
+
+<div *ngIf="fileLoad()" class="table-responsive rounded text-center">
+  <table class="table table-bordered">
+    <thead class="thead-dark">
+      <tr>
+        <th scope="col"> # </th>
+        <th scope="col"> Firstname </th>
+        <th scope="col"> Lastname </th>
+        <th scope="col"> Email </th>
+        <th scope="col"> Student ID </th>
+        <th scope="col"> Hall Of Residence </th>
+        <th scope="col"> Year </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let csvData of csvRecords;let i = index;">
+        <td>{{i+1}}</td>
+        <td>{{csvData.firstname}}</td>
+        <td>{{csvData.lastname}}</td>
+        <td>{{csvData.email}}</td>
+        <td>{{csvData.studentID}}</td>
+        <td>{{csvData.hallID}}</td>
+        <td>{{csvData.year}}</td>
+      </tr>
+    </tbody>
+  </table>
+  <button mat-raised-button class="register-btn"> REGISTER </button>
+</div>
