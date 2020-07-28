@@ -18,3 +18,8 @@
 .register-btn {
   margin-bottom: 10px;
 }
+
+.mask {
+  background: transparent !important;
+  border: none;
+}

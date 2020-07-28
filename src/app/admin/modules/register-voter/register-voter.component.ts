@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgxCsvParser, NgxCSVParserError } from 'ngx-csv-parser';
+import { PasswordGenerator } from 'src/app/shared/password-generator';
 
 @Component({
   selector: 'app-register-voter',
@@ -11,6 +12,14 @@ export class RegisterVoterComponent implements OnInit {
   csvRecords: any[] = [];
   header = true;
   fileLoaded = false;
+
+  //Declaring Password Generator
+  generator = new PasswordGenerator();
+
+  //Get new generatedPassword
+  getPass() {
+    return this.generator.generate();
+  }
 
   constructor(private ngxCsvParser: NgxCsvParser) {
   }
@@ -29,15 +38,21 @@ export class RegisterVoterComponent implements OnInit {
       .pipe().subscribe((result: Array<any>) => {
         this.isLoading = false;
         this.fileLoaded = true;
-        console.log('Result', result);
-        this.csvRecords = result;
+        var actualResult = new Array();
+        //Adding Generated password to array
+        result.forEach(row => {
+          let x = JSON.parse(JSON.stringify(row).replace(/}/g, '').concat(',"password":"', this.generator.generate(), '"}'));
+          actualResult.push(x);
+        });
+        console.log('Result', actualResult);
+        this.csvRecords = actualResult;
       }, (error: NgxCSVParserError) => {
         this.isLoading = false;
         console.log('Error', error);
       });
 
   }
-  
+
   ngOnInit(): void {
   }
 
@@ -46,7 +61,7 @@ export class RegisterVoterComponent implements OnInit {
   loadingRequest() {
     return this.isLoading;
   }
-  
+
   fileLoad() {
     return this.fileLoaded;
   }
