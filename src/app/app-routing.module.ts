@@ -9,6 +9,7 @@ import { RegisterAdminComponent } from './admin/modules/register-admin/register-
 import { RemoveAdminComponent } from './admin/modules/remove-admin/remove-admin.component';
 import { ResetAdminPasswordComponent } from './admin/modules/reset-admin-password/reset-admin-password.component';
 import { RegisterVoterComponent } from './admin/modules/register-voter/register-voter.component';
+import { RemoveVoterComponent } from './admin/modules/remove-voter/remove-voter.component';
 
 //All Routes in the Application
 const routes: Routes = [
@@ -20,7 +21,8 @@ const routes: Routes = [
       { path: 'register-admin', component: RegisterAdminComponent },
       { path: 'remove-admin', component: RemoveAdminComponent },
       { path: 'reset-admin-password', component: ResetAdminPasswordComponent },
-      { path: 'register-voter', component: RegisterVoterComponent }
+      { path: 'register-voter', component: RegisterVoterComponent },
+      { path: 'remove-voter', component: RemoveVoterComponent }
     ]
   },
   { path: '', pathMatch: 'full', redirectTo: '/admin' }
