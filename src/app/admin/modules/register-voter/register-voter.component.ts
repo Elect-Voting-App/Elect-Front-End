@@ -49,6 +49,13 @@ export class RegisterVoterComponent implements OnInit {
 
   }
 
+  getTable(tableID){
+    var dataTable = document.getElementById(tableID);
+    const exporter = new TableCSVExporter(dataTable);
+    const csvOutput = exporter.convertToCSV();
+    console.log(csvOutput);
+  }
+
   ngOnInit(): void {
   }
 
@@ -62,14 +69,12 @@ export class RegisterVoterComponent implements OnInit {
     return this.fileLoaded;
   }
 
-
-
 }
 
 
 export class TableCSVExporter {
   rows: any;
-  constructor (table, includeHeaders = true) {
+  constructor (table, includeHeaders = false) {
     table = table;
     this.rows = Array.from(table.querySelectorAll("tr"));
 

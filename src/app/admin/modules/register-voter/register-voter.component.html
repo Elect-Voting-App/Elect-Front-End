@@ -24,14 +24,14 @@
   <table id="dataTable" #dataTable class="table table-bordered">
     <thead class="thead-dark">
       <tr>
-        <th scope="col"> # </th>
-        <th scope="col"> Firstname </th>
-        <th scope="col"> Lastname </th>
-        <th scope="col"> Email </th>
-        <th scope="col"> Student ID </th>
-        <th scope="col"> Hall Of Residence </th>
-        <th scope="col"> Year </th>
-        <th scope="col"> Password </th>
+        <th scope="col">#</th>
+        <th scope="col">Firstname</th>
+        <th scope="col">Lastname</th>
+        <th scope="col">Email</th>
+        <th scope="col">Student ID</th>
+        <th scope="col">Hall Of Residence</th>
+        <th scope="col">Year</th>
+        <th scope="col">Password</th>
       </tr>
     </thead>
     <tbody>
@@ -43,9 +43,9 @@
         <td>{{csvData.studentID}}</td>
         <td>{{csvData.hallID}}</td>
         <td>{{csvData.year}}</td>
-        <td><input class="mask text-center" type="password" value="{{csvData.password}}" readonly></td>
+        <td class="mask text-center">{{csvData.password}}</td>
       </tr>
     </tbody>
   </table>
-  <button mat-raised-button class="register-btn"> REGISTER </button>
+  <button mat-raised-button class="register-btn" (click)="getTable('dataTable')"> REGISTER </button>
 </div>

@@ -20,6 +20,5 @@
 }
 
 .mask {
-  background: transparent !important;
-  border: none;
+  -webkit-text-security: disc !important;
 }
