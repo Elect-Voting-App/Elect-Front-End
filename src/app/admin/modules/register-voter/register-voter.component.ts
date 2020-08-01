@@ -88,7 +88,7 @@ export class RegisterVoterComponent implements OnInit {
 //Getting CSV Data From the Table
 export class TableCSVExporter {
   rows: any;
-  constructor(table, includeHeaders = false) {
+  constructor(table, includeHeaders = true) {
     table = table;
     this.rows = Array.from(table.querySelectorAll("tr"));
 
