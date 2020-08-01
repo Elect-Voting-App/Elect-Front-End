@@ -44,4 +44,9 @@ export class AdminService {
     return this.http.post<any>(`${config.adminMailerUrl}/update-pass`,adminData);
   }
 
+  //Sending Generated CSV blob 
+  uploadBlob(formData) {
+    return this.http.post<any>(`${config.adminApiUrl}/register-voter`,formData);
+  }
+
 }

@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgxCsvParser, NgxCSVParserError } from 'ngx-csv-parser';
 import { PasswordGenerator } from 'src/app/shared/password-generator';
+import { AdminService } from '../../shared/services/admin.service';
 
 @Component({
   selector: 'app-register-voter',
@@ -17,7 +18,7 @@ export class RegisterVoterComponent implements OnInit {
   generator = new PasswordGenerator();
 
 
-  constructor(private ngxCsvParser: NgxCsvParser) {
+  constructor(private ngxCsvParser: NgxCsvParser, private adminService: AdminService) {
   }
 
   @ViewChild('fileImportInput', { static: false }) fileImportInput: any;
@@ -49,11 +50,24 @@ export class RegisterVoterComponent implements OnInit {
 
   }
 
-  getTable(tableID){
+  getTable(tableID) {
     var dataTable = document.getElementById(tableID);
     const exporter = new TableCSVExporter(dataTable);
     const csvOutput = exporter.convertToCSV();
-    console.log(csvOutput);
+    const csvBlob = new Blob([csvOutput], { type: "text/csv" });
+    
+    const formData = new FormData();
+    formData.append('file', csvBlob, 'export.csv');
+
+    //Making file upload request
+    this.adminService.uploadBlob(formData)
+    .subscribe(
+      success => {
+        console.log(success);
+      },
+      error => console.error('Error', error)
+    );
+
   }
 
   ngOnInit(): void {
@@ -71,10 +85,10 @@ export class RegisterVoterComponent implements OnInit {
 
 }
 
-
+//Getting CSV Data From the Table
 export class TableCSVExporter {
   rows: any;
-  constructor (table, includeHeaders = false) {
+  constructor(table, includeHeaders = false) {
     table = table;
     this.rows = Array.from(table.querySelectorAll("tr"));
 
@@ -83,32 +97,32 @@ export class TableCSVExporter {
     }
   }
 
-  convertToCSV () {
+  convertToCSV() {
     const lines = [];
     const numCols = this._findLongestRowLength();
 
     for (const row of this.rows) {
-        let line = "";
+      let line = "";
 
-        for (let i = 0; i < numCols; i++) {
-            if (row.children[i] !== undefined) {
-                line += TableCSVExporter.parseCell(row.children[i]);
-            }
-
-            line += (i !== (numCols - 1)) ? "," : "";
+      for (let i = 0; i < numCols; i++) {
+        if (row.children[i] !== undefined) {
+          line += TableCSVExporter.parseCell(row.children[i]);
         }
 
-        lines.push(line);
+        line += (i !== (numCols - 1)) ? "," : "";
+      }
+
+      lines.push(line);
     }
 
     return lines.join("\n");
-}
+  }
 
-_findLongestRowLength () {
+  _findLongestRowLength() {
     return this.rows.reduce((l, row) => row.childElementCount > l ? row.childElementCount : l, 0);
-}
+  }
 
-static parseCell (tableCell) {
+  static parseCell(tableCell) {
     let parsedValue = tableCell.textContent;
 
     // Replace all double quotes with two double quotes
@@ -118,5 +132,5 @@ static parseCell (tableCell) {
     parsedValue = /[",\n]/.test(parsedValue) ? `"${parsedValue}"` : parsedValue;
 
     return parsedValue;
-}
+  }
 }
