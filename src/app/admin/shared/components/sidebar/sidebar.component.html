@@ -19,22 +19,23 @@
     <a mat-list-item routerLinkActive="list-item-active" routerLink="/admin/reset-admin-password">Reset Password</a>
   </div>
 
-  <mat-divider></mat-divider>
+  <div>
+    <mat-divider></mat-divider>
+    <span matSubheader>Voters</span>
+    <a mat-list-item routerLinkActive="list-item-active" routerLink="/admin/view-all-voters">View All Voters</a>
+    <a mat-list-item routerLinkActive="list-item-active" routerLink="/admin/register-voter">Register Voters</a>
+    <a mat-list-item routerLinkActive="list-item-active" routerLink="/admin">Reset Password</a>
+    <a mat-list-item routerLinkActive="list-item-active" routerLink="/admin/remove-voter">Delete Voters</a>
+  </div>
 
-  <span matSubheader>Voters</span>
-  <a mat-list-item routerLinkActive="list-item-active" routerLink="/admin">View All Voters</a>
-  <a mat-list-item routerLinkActive="list-item-active" routerLink="/admin/register-voter">Register Voters</a>
-  <a mat-list-item routerLinkActive="list-item-active" routerLink="/admin">Reset Password</a>
-  <a mat-list-item routerLinkActive="list-item-active" routerLink="/admin/remove-voter">Delete Voters</a>
-  
-  <mat-divider></mat-divider>
-  
-  <span matSubheader>Candidates</span>
-  <a mat-list-item routerLinkActive="list-item-active" routerLink="/admin">View All Candidates</a>
-  <a mat-list-item routerLinkActive="list-item-active" routerLink="/admin">Register Candidates</a>
-  <a mat-list-item routerLinkActive="list-item-active" routerLink="/admin">Reset Password</a>
-  <a mat-list-item routerLinkActive="list-item-active" routerLink="/admin">Delete Candidates</a>
-
+  <div>
+    <mat-divider></mat-divider>
+    <span matSubheader>Candidates</span>
+    <a mat-list-item routerLinkActive="list-item-active" routerLink="/admin">View All Candidates</a>
+    <a mat-list-item routerLinkActive="list-item-active" routerLink="/admin">Register Candidates</a>
+    <a mat-list-item routerLinkActive="list-item-active" routerLink="/admin">Reset Password</a>
+    <a mat-list-item routerLinkActive="list-item-active" routerLink="/admin">Delete Candidates</a>
+  </div>
 
 
 </mat-nav-list>

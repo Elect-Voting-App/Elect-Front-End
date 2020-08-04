@@ -21,6 +21,7 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { ResetAdminPasswordComponent } from '../../modules/reset-admin-password/reset-admin-password.component';
 import { RegisterVoterComponent } from '../../modules/register-voter/register-voter.component';
 import { RemoveVoterComponent } from '../../modules/remove-voter/remove-voter.component';
+import { ViewAllVotersComponent } from '../../modules/view-all-voters/view-all-voters.component';
 
 
 
@@ -32,7 +33,8 @@ import { RemoveVoterComponent } from '../../modules/remove-voter/remove-voter.co
     RemoveAdminComponent,
     ResetAdminPasswordComponent,
     RegisterVoterComponent,
-    RemoveVoterComponent
+    RemoveVoterComponent,
+    ViewAllVotersComponent
   ],
   imports: [
     CommonModule,
