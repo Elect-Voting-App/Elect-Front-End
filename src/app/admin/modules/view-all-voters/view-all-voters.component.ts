@@ -24,6 +24,21 @@ export class ViewAllVotersComponent implements OnInit {
   hasErrorMessage: string;
   hasSuccessMessage: string;
 
+  //Load success
+  loadingSuccess() {
+    return this.hasSuccess;
+  }
+
+  //Load Error
+  loadingError() {
+    return this.hasError;
+  }
+
+  //Loading animation
+  loadingRequest() {
+    return this.isLoading;
+  }
+
   //Get All voters method
   getVoters() {
     this.adminService.getAllVoters().subscribe(

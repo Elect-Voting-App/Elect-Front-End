@@ -1,1 +1,42 @@
-<p>view-all-voters works!</p>
+<div *ngIf="loadingRequest()">
+  <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+</div>
+<div class="mb-4 mt-3">
+  <div class="col-md-12 text-center">
+    <img class="logo mx-auto" src="assets/img/logo.png">
+    <span class="d-block h1">ALL VOTERS</span>
+  </div>
+</div>
+
+<!-- Displaying error -->
+<div *ngIf="loadingError()">
+  <p class="alert alert-danger text-center"> {{hasErrorMessage}} </p>
+</div>
+<div *ngIf="loadingSuccess()">
+  <p class="alert alert-success text-center"> {{hasSuccessMessage}} </p>
+</div>
+
+<!-- Creating Table to hold all data -->
+<div class="table-responsive rounded text-center">
+  <table class="table table-bordered">
+    <thead class="thead-dark">
+      <tr>
+        <th scope="col"> # </th>
+        <th scope="col"> Fullname </th>
+        <th scope="col"> Email </th>
+        <th scope="col"> Student ID </th>
+        <th scope="col"> Hall </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let voter of Voters; let i = index;">
+        <td class="d-none"> <input type="number" readonly value="{{voter.id}}"></td>
+        <td> {{i+1}}</td>
+        <td> {{ voter.firstname }} {{ voter.lastname }} </td>
+        <td> {{ voter.email }} </td>
+        <td> {{ voter.student_id }} </td>
+        <td> {{ voter.hall_id }} </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
