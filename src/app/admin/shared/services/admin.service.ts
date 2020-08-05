@@ -49,9 +49,24 @@ export class AdminService {
     return this.http.post<any>(`${config.adminApiUrl}/register-voter`,formData);
   }
 
+  /*==== VOTERS ====*/
   //Get all Voters
   getAllVoters() {
     return this.http.get<any>(`${config.adminApiUrl}/all-voters`);
+  }
+
+  //Search voter
+  searchVoter(voterEmail) {
+    return this.http.post<any>(`${config.adminApiUrl}/voterSearch`, voterEmail);
+  }
+
+  //Reset Voter Password
+  resetVoterPassword(voterData) {
+    return this.http.put<any>(`${config.adminApiUrl}/update-voter-pass`, voterData);
+  }
+
+  sendVoterResetEmail(voterData) {
+    return this.http.post<any>(`${config.adminMailerUrl}/update-voter-pass`, voterData);
   }
 
 }

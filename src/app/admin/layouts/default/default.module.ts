@@ -22,6 +22,7 @@ import { ResetAdminPasswordComponent } from '../../modules/reset-admin-password/
 import { RegisterVoterComponent } from '../../modules/register-voter/register-voter.component';
 import { RemoveVoterComponent } from '../../modules/remove-voter/remove-voter.component';
 import { ViewAllVotersComponent } from '../../modules/view-all-voters/view-all-voters.component';
+import { ResetVoterPasswordComponent } from '../../modules/reset-voter-password/reset-voter-password.component';
 
 
 
@@ -34,7 +35,8 @@ import { ViewAllVotersComponent } from '../../modules/view-all-voters/view-all-v
     ResetAdminPasswordComponent,
     RegisterVoterComponent,
     RemoveVoterComponent,
-    ViewAllVotersComponent
+    ViewAllVotersComponent,
+    ResetVoterPasswordComponent
   ],
   imports: [
     CommonModule,
