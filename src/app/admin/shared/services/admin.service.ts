@@ -9,13 +9,13 @@ export class AdminService {
 
   constructor(private http: HttpClient) { }
 
-  //Registering Admin
+  //Register Admin
   register(adminData) {
     return this.http.post<any>(`${config.adminApiUrl}/register`, adminData);
   }
 
-  //Getting All Admins
-  getAll() {
+  //Get All Admins
+  getAllAdmins() {
     return this.http.get<any>(`${config.adminApiUrl}/all-admins`);
   }
 
@@ -24,12 +24,12 @@ export class AdminService {
     return this.http.delete<any>(`${config.adminApiUrl}/remove/${id}`);
   }
 
-  //Sending Admin Email
+  //Send Admin Email
   sendEmail(adminData) {
     return this.http.post<any>(`${config.adminMailerUrl}/admin`, adminData);
   }
 
-  //Searching for admin Email
+  //Search for admin Email
   searchEmail(adminEmail) {
     return this.http.post<any>(`${config.adminApiUrl}/search`, adminEmail);
   }
@@ -39,14 +39,19 @@ export class AdminService {
     return this.http.put<any>(`${config.adminApiUrl}/update-pass`,adminData);
   }
 
-  //Sending Reset Email
+  //Send Reset Email
   sendResetEmail(adminData) {
     return this.http.post<any>(`${config.adminMailerUrl}/update-pass`,adminData);
   }
 
-  //Sending Generated CSV blob 
+  //Send Generated CSV blob 
   uploadBlob(formData) {
     return this.http.post<any>(`${config.adminApiUrl}/register-voter`,formData);
+  }
+
+  //Get all Voters
+  getAllVoters() {
+    return this.http.get<any>(`${config.adminApiUrl}/all-voters`);
   }
 
 }

@@ -38,7 +38,7 @@ export class RemoveAdminComponent implements OnInit {
 
   //getting All Admins
   allAdmins() {
-    this.adminService.getAll().subscribe(
+    this.adminService.getAllAdmins().subscribe(
       success => {
         if (success.status) {
           this.isLoading = false;
