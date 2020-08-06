@@ -18,11 +18,20 @@ export class RegisterCandidateComponent implements OnInit {
     return this.registerCandidate.get('lastname');
   }
 
+  get category() {
+    return this.registerCandidate.get('category');
+  }
+
+  get position() {
+    return this.registerCandidate.get('position');
+  }
+
   constructor(private formBuilder: FormBuilder, private adminService: AdminService) { }
 
   ngOnInit(): void {
     this.isLoading = true;
     this.getPositions();
+    this.getCategories();
   }
 
   //Declaring Variables
@@ -32,6 +41,7 @@ export class RegisterCandidateComponent implements OnInit {
   hasErrorMessage: string;
   hasSuccessMessage: string;
   Positions: any;
+  Category: any;
 
   registerError() {
     return this.hasError;
@@ -48,24 +58,42 @@ export class RegisterCandidateComponent implements OnInit {
   registerCandidate = this.formBuilder.group({
     firstname: ['', [Validators.required, Validators.nullValidator]],
     lastname: ['', [Validators.required, Validators.nullValidator]],
-    position: ['',[Validators.required]]
+    category: ['', [Validators.required]],
+    position: ['', [Validators.required]]
   });
 
   getPositions() {
     this.adminService.getPositions()
-    .subscribe(
-      success => {
-        if (success.status) {
-          this.isLoading = false;
-          this.Positions = success.data;
-        } else {
-          this.isLoading = false;
-          this.hasError = true;
-          this.hasErrorMessage = success.message;
-        }
-      },
-      error => console.log('Error', error)
-    );
+      .subscribe(
+        success => {
+          if (success.status) {
+            this.isLoading = false;
+            this.Positions = success.data;
+          } else {
+            this.isLoading = false;
+            this.hasError = true;
+            this.hasErrorMessage = success.message;
+          }
+        },
+        error => console.log('Error', error)
+      );
+  }
+
+  getCategories() {
+    this.adminService.getCategories()
+      .subscribe(
+        success => {
+          if (success.status) {
+            this.isLoading = false;
+            this.Category = success.data;
+          } else {
+            this.isLoading = false;
+            this.hasError = true;
+            this.hasErrorMessage = success.message;
+          }
+        },
+        error => console.log('Error', error)
+      );
   }
 
 }

@@ -33,8 +33,14 @@
     </div>
   </div>
   <div class="form-label-group">
+    <select required class="form-control" name="category" formControlName="category">
+      <option value="" disabled>Select a Category</option>
+      <option *ngFor="let category of Category;" value="{{category.id}}"> {{ category.category_name }} </option>
+    </select>
+  </div>
+  <div class="form-label-group">
     <select required class="form-control" name="position" formControlName="position">
-      <option value="" disabled>Select a position for Candidate</option>
+      <option value="" disabled>Select a Position</option>
       <option *ngFor="let position of Positions;" value="{{position.id}}"> {{ position.position_name }} </option>
     </select>
   </div>

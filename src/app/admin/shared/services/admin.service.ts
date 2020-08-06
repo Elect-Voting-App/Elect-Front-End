@@ -92,4 +92,8 @@ export class AdminService {
     return this.http.get<any>(`${config.adminApiUrl}/positions`);
   }
 
+  getCategories() {
+    return this.http.get<any>(`${config.adminApiUrl}/categories`);
+  }
+
 }
