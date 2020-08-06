@@ -96,4 +96,25 @@ export class RegisterCandidateComponent implements OnInit {
       );
   }
 
+  onSubmit() {
+    this.isLoading = true;
+    console.log(this.registerCandidate.value);
+    this.adminService.registerCandidate(this.registerCandidate.value)
+      .subscribe(
+        success => {
+          if (success.status) {
+            this.isLoading = false;
+            this.hasSuccess = true;
+            this.hasSuccessMessage = success.message;
+            this.registerCandidate.reset();
+          } else {
+            this.isLoading = false;
+            this.hasError = true;
+            this.hasErrorMessage = success.message;
+          }
+        },
+        error => console.log('Error', error)
+      );
+}
+
 }

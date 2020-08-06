@@ -81,19 +81,27 @@ export class AdminService {
 
   //Search Candidate
   searchCandidate(candidateData) {
-    return this.http.post<any>(`${config.adminApiUrl}/candidateSearch`, candidateData);
+    return this.http.post<any>(`${config.adminApiUrl}/search-candidate`, candidateData);
   }
 
+  //Delete Candidate
   deleteCandidate(id) {
     return this.http.delete<any>(`${config.adminApiUrl}/remove-candidate/${id}`);
   }
 
+  //Get Positions
   getPositions() {
     return this.http.get<any>(`${config.adminApiUrl}/positions`);
   }
 
+  //Get Categories
   getCategories() {
     return this.http.get<any>(`${config.adminApiUrl}/categories`);
+  }
+
+  //Register Candidate
+  registerCandidate(candidateData) {
+    return this.http.post<any>(`${config.adminApiUrl}/register-candidate`, candidateData);
   }
 
 }
