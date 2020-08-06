@@ -24,6 +24,8 @@ import { RemoveVoterComponent } from '../../modules/remove-voter/remove-voter.co
 import { ViewAllVotersComponent } from '../../modules/view-all-voters/view-all-voters.component';
 import { ResetVoterPasswordComponent } from '../../modules/reset-voter-password/reset-voter-password.component';
 import { ViewAllCandidatesComponent } from '../../modules/view-all-candidates/view-all-candidates.component';
+import { RemoveCandidateComponent } from '../../modules/remove-candidate/remove-candidate.component';
+import { RegisterCandidateComponent } from '../../modules/register-candidate/register-candidate.component';
 
 
 
@@ -38,7 +40,9 @@ import { ViewAllCandidatesComponent } from '../../modules/view-all-candidates/vi
     RemoveVoterComponent,
     ViewAllVotersComponent,
     ResetVoterPasswordComponent,
-    ViewAllCandidatesComponent
+    ViewAllCandidatesComponent,
+    RegisterCandidateComponent,
+    RemoveCandidateComponent
   ],
   imports: [
     CommonModule,

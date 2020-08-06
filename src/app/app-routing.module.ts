@@ -13,6 +13,8 @@ import { RemoveVoterComponent } from './admin/modules/remove-voter/remove-voter.
 import { ViewAllVotersComponent } from './admin/modules/view-all-voters/view-all-voters.component';
 import { ResetVoterPasswordComponent } from './admin/modules/reset-voter-password/reset-voter-password.component';
 import { ViewAllCandidatesComponent } from './admin/modules/view-all-candidates/view-all-candidates.component';
+import { RegisterCandidateComponent } from './admin/modules/register-candidate/register-candidate.component';
+import { RemoveCandidateComponent } from './admin/modules/remove-candidate/remove-candidate.component';
 
 //All Routes in the Application
 const routes: Routes = [
@@ -28,7 +30,9 @@ const routes: Routes = [
       { path: 'remove-voter', component: RemoveVoterComponent },
       { path: 'view-all-voters', component: ViewAllVotersComponent },
       { path: 'reset-voter-password', component: ResetVoterPasswordComponent },
-      { path: 'view-all-candidates', component: ViewAllCandidatesComponent }
+      { path: 'view-all-candidates', component: ViewAllCandidatesComponent },
+      { path: 'register-candidate', component: RegisterCandidateComponent },
+      { path: 'remove-candidate', component: RemoveCandidateComponent }
     ]
   },
   { path: '', pathMatch: 'full', redirectTo: '/admin' }
