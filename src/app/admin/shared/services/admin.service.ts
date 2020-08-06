@@ -69,4 +69,9 @@ export class AdminService {
     return this.http.post<any>(`${config.adminMailerUrl}/update-voter-pass`, voterData);
   }
 
+  /*==== CANDIDATES ====*/
+  getAllCandidates() {
+    return this.http.get<any>(`${config.adminApiUrl}/all-candidates`);
+  }
+
 }
