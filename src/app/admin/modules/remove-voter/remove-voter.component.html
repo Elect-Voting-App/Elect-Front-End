@@ -1,4 +1,4 @@
-<div>
+<div *ngIf="loadingRequest()">
     <mat-progress-bar mode="indeterminate"></mat-progress-bar>
   </div>
   <div class="mb-4 mt-3">
@@ -7,16 +7,32 @@
       <span class="d-block h1">VOTER DELETION</span>
     </div>
   </div>
-  <!-- Displaying error -->
-<div>
-    <p class="alert alert-danger text-center"> hasErrorMessage </p>
+  <div class="search">
+    <form [formGroup]="resetForm" (ngSubmit)="onSearch()" autocomplete="off">
+      <div *ngIf="searchError()">
+        <p class="alert alert-danger text-center"> {{hasErrorMessage}} </p>
+      </div>
+      <div *ngIf="searchSuccess()">
+        <p class="alert alert-success text-center"> {{hasSuccessMessage}} </p>
+      </div>
+      <div class="form-label-group">
+        <input type="email" name="email" class="form-control" id="inputEmail" placeholder="Email Address"
+          formControlName="email" required [class.is-invalid]="email.invalid && email.touched">
+        <label for="inputEmail">Email address</label>
+        <div *ngIf="email.invalid && email.touched">
+          <small *ngIf="email.errors?.required" class="text-danger"> Email Address is required</small>
+          <small *ngIf="email.errors?.email" class="text-danger"> Enter a valid Email Address</small>
+        </div>
+      </div>
+      <div class="col-md-12 text-center">
+        <button [disabled]="!resetForm.valid" type="submit"
+          class="btn btn-block mybtn btn-primary text-uppercase">Search</button>
+      </div>
+    </form>
   </div>
-  <div >
-    <p class="alert alert-success text-center"> hasSuccessMessage </p>
-  </div>
-
+  
   <!-- Creating Table to hold all data -->
-<div class="table-responsive rounded text-center">
+  <div *ngIf="matchFound()" class="table-responsive rounded text-center">
     <table class="table table-bordered">
       <thead class="thead-dark">
         <tr>
@@ -28,15 +44,14 @@
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <td class="d-none"> <input type="number" readonly value="admin.id"></td>
-          <td> admin.firstname  </td>
-          <td>  admin.lastname  </td>
-          <td>  admin.email  </td>
-          <td> admin.role  </td>
-          <td> <button mat-raised-button > DELETE </button> </td>
+        <tr *ngFor="let admin of Admins">
+          <td class="d-none"> <input type="email" #search readonly value="{{admin.email}}"></td>
+          <td> {{ admin.firstname }} </td>
+          <td> {{ admin.lastname }} </td>
+          <td> {{ admin.email }} </td>
+          <td> {{ admin.role }} </td>
+          <td> <button mat-raised-button (click)="onReset(search.value)"> RESET </button> </td>
         </tr>
       </tbody>
     </table>
   </div>
-  
