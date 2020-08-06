@@ -69,6 +69,11 @@ export class AdminService {
     return this.http.post<any>(`${config.adminMailerUrl}/update-voter-pass`, voterData);
   }
 
+  //Delete Voter
+  deleteVoter(id) {
+    return this.http.delete<any>(`${config.adminApiUrl}/remove-voter/${id}`);
+  }
+
   /*==== CANDIDATES ====*/
   getAllCandidates() {
     return this.http.get<any>(`${config.adminApiUrl}/all-candidates`);

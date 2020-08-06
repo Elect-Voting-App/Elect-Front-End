@@ -31,7 +31,8 @@ export class RemoveVoterComponent implements OnInit {
   isLoading = false;
   hasErrorMessage: string;
   hasSuccessMessage: string;
-  Admins: any;
+  Voters: any;
+  ID: number;
 
   searchError() {
     return this.hasError;
@@ -51,14 +52,14 @@ export class RemoveVoterComponent implements OnInit {
   //On Search 
   onSearch() {
     this.isLoading = true;
-    this.adminService.searchEmail(this.resetForm.value)
+    this.adminService.searchVoter(this.resetForm.value)
       .subscribe(
         success => {
           if (success.status) {
             this.hasSuccess = true;
             this.hasSuccessMessage = 'Match Found';
             this.isLoading = false;
-            this.Admins = success.data;
+            this.Voters = success.data;
             this.resetForm.reset();
           } else {
             this.isLoading = false;
@@ -70,33 +71,16 @@ export class RemoveVoterComponent implements OnInit {
       );
   }
 
-  onReset(email) {
+  onDelete(id) {
     this.isLoading = true;
-    //Declaring the generator
-    let generator = new PasswordGenerator();
-    let generatedPassword = generator.generate();
-    let requestValues = { email: email, password: generatedPassword }
-    console.log(requestValues);
-    this.adminService.resetPassword(requestValues)
+    this.ID = parseInt(id);
+    this.adminService.deleteVoter(this.ID)
       .subscribe(
         success => {
           if (success.status) {
-            //Send email to the user with the generated password
-            this.adminService.sendResetEmail(requestValues)
-              .subscribe(
-                success => {
-                  if (success.status) {
-                    this.isLoading = false;
-                    this.hasSuccess = true;
-                    this.hasSuccessMessage = success.message;
-                  } else {
-                    this.isLoading = false;
-                    this.hasError = true;
-                    this.hasErrorMessage = success.message;
-                  }
-                },
-                error => console.log('Error', error)
-              );
+            this.isLoading = false;
+            this.hasSuccess = true;
+            this.hasSuccessMessage = success.message;
           } else {
             this.isLoading = false;
             this.hasError = true;
