@@ -1,7 +1,16 @@
+.mybtn {
+  border-radius: 50px;
+  background-color: #009afe;
+}
+
+.search {
+  margin-bottom: 20px;
+}
+
 .logo {
   width: 250px;
 }
 
-.brand {
-  font-size: 2.5rem;
+.form-label-group > label {
+  left: 10px !important;
 }

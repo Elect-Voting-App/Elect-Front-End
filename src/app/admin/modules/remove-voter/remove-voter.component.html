@@ -1,57 +1,57 @@
 <div *ngIf="loadingRequest()">
-    <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+  <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+</div>
+<div class="mb-4 mt-3">
+  <div class="col-md-12 text-center">
+    <img class="logo mx-auto" src="assets/img/logo.png">
+    <span class="d-block h1">REMOVE VOTER</span>
   </div>
-  <div class="mb-4 mt-3">
-    <div class="col-md-12 text-center">
-      <img class="logo mx-auto" src="assets/img/logo.png">
-      <span class="d-block h1">REMOVE VOTER</span>
+</div>
+<div class="search">
+  <form [formGroup]="resetForm" (ngSubmit)="onSearch()" autocomplete="off">
+    <div *ngIf="searchError()">
+      <p class="alert alert-danger text-center"> {{hasErrorMessage}} </p>
     </div>
-  </div>
-  <div class="search">
-    <form [formGroup]="resetForm" (ngSubmit)="onSearch()" autocomplete="off">
-      <div *ngIf="searchError()">
-        <p class="alert alert-danger text-center"> {{hasErrorMessage}} </p>
+    <div *ngIf="searchSuccess()">
+      <p class="alert alert-success text-center"> {{hasSuccessMessage}} </p>
+    </div>
+    <div class="form-label-group">
+      <input type="email" name="email" class="form-control" id="inputEmail" placeholder="Email Address"
+        formControlName="email" required [class.is-invalid]="email.invalid && email.touched">
+      <label for="inputEmail">Email address</label>
+      <div *ngIf="email.invalid && email.touched">
+        <small *ngIf="email.errors?.required" class="text-danger"> Email Address is required</small>
+        <small *ngIf="email.errors?.email" class="text-danger"> Enter a valid Email Address</small>
       </div>
-      <div *ngIf="searchSuccess()">
-        <p class="alert alert-success text-center"> {{hasSuccessMessage}} </p>
-      </div>
-      <div class="form-label-group">
-        <input type="email" name="email" class="form-control" id="inputEmail" placeholder="Email Address"
-          formControlName="email" required [class.is-invalid]="email.invalid && email.touched">
-        <label for="inputEmail">Email address</label>
-        <div *ngIf="email.invalid && email.touched">
-          <small *ngIf="email.errors?.required" class="text-danger"> Email Address is required</small>
-          <small *ngIf="email.errors?.email" class="text-danger"> Enter a valid Email Address</small>
-        </div>
-      </div>
-      <div class="col-md-12 text-center">
-        <button [disabled]="!resetForm.valid" type="submit"
-          class="btn btn-block mybtn btn-primary text-uppercase">Search</button>
-      </div>
-    </form>
-  </div>
-  
-  <!-- Creating Table to hold all data -->
-  <div *ngIf="matchFound()" class="table-responsive rounded text-center">
-    <table class="table table-bordered">
-      <thead class="thead-dark">
-        <tr>
-          <th scope="col"> Fullname </th>
-          <th scope="col"> Email </th>
-          <th scope="col"> Student ID </th>
-          <th scope="col"> Hall </th>
-          <th scope="col"> Action </th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let voter of Voters">
-          <td class="d-none"> <input type="email" #delete readonly value="{{voter.id}}"></td>
-          <td> {{ voter.firstname }} {{ voter.lastname }} </td>
-          <td> {{ voter.email }} </td>
-          <td> {{ voter.student_id }} </td>
-          <td> {{ voter.hall_name }} </td>
-          <td> <button mat-raised-button (click)="onDelete(delete.value)"> DELETE </button> </td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
+    </div>
+    <div class="col-md-12 text-center">
+      <button [disabled]="!resetForm.valid" type="submit"
+        class="btn btn-block mybtn btn-primary text-uppercase">Search</button>
+    </div>
+  </form>
+</div>
+
+<!-- Creating Table to hold all data -->
+<div *ngIf="matchFound()" class="table-responsive rounded text-center">
+  <table class="table table-bordered">
+    <thead class="thead-dark">
+      <tr>
+        <th scope="col"> Fullname </th>
+        <th scope="col"> Email </th>
+        <th scope="col"> Student ID </th>
+        <th scope="col"> Hall </th>
+        <th scope="col"> Action </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let voter of Voters">
+        <td class="d-none"> <input type="email" #delete readonly value="{{voter.id}}"></td>
+        <td> {{ voter.firstname }} {{ voter.lastname }} </td>
+        <td> {{ voter.email }} </td>
+        <td> {{ voter.student_id }} </td>
+        <td> {{ voter.hall_name }} </td>
+        <td> <button mat-raised-button (click)="onDelete(delete.value)"> DELETE </button> </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

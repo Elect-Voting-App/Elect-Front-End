@@ -45,10 +45,10 @@ export class RegisterAdminComponent implements OnInit {
 
   //Creating the Form Model 
   registerAdmin = this.formBuilder.group({
-    firstname: ['', [Validators.required, Validators.minLength(3)]],
-    lastname: ['', [Validators.required, Validators.minLength(3)]],
-    email: ['', [Validators.required, Validators.email]],
-    password: [this.generatedPassword, [Validators.required, Validators.minLength(6)]],
+    firstname: ['', [Validators.required, Validators.minLength(3), Validators.nullValidator]],
+    lastname: ['', [Validators.required, Validators.minLength(3), Validators.nullValidator]],
+    email: ['', [Validators.required, Validators.email, Validators.nullValidator]],
+    password: [this.generatedPassword, [Validators.required, Validators.minLength(6), Validators.nullValidator]],
     role: ['', [Validators.required]]
   });
 

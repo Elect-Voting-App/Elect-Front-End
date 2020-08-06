@@ -1,1 +1,44 @@
-<p>register-candidate works!</p>
+<div *ngIf="loadingRequest()">
+  <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+</div>
+<div class="mb-4 mt-3">
+  <div class="col-md-12 text-center">
+    <img class="logo mx-auto" src="assets/img/logo.png">
+    <span class="d-block h1">REGISTER CANDIDATE</span>
+  </div>
+</div>
+<form [formGroup]="registerCandidate">
+  <div *ngIf="registerError()">
+    <p class="alert alert-danger text-center"> {{hasErrorMessage}} </p>
+  </div>
+  <div *ngIf="registerSuccess()">
+    <p class="alert alert-success text-center"> {{hasSuccessMessage}} </p>
+  </div>
+  <div class="row">
+    <div class="form-label-group col-md-6">
+      <input type="text" name="firstname" class="form-control" id="inputFirstname" placeholder="Enter Firstname"
+        formControlName="firstname" required [class.is-invalid]="firstname.invalid && firstname.touched">
+      <label for="inputFirstname">Enter Firstname</label>
+      <div *ngIf="firstname.invalid && firstname.touched">
+        <small *ngIf="firstname.errors?.required" class="text-danger"> Firstname is required</small>
+      </div>
+    </div>
+    <div class="form-label-group col-md-6">
+      <input type="text" name="lastname" class="form-control" id="inputLastname" placeholder="Enter Lastname"
+        formControlName="lastname" required [class.is-invalid]="lastname.invalid && lastname.touched">
+      <label for="inputLastname">Enter Lastname</label>
+      <div *ngIf="lastname.invalid && lastname.touched">
+        <small *ngIf="lastname.errors?.required" class="text-danger"> Lastname is required</small>
+      </div>
+    </div>
+  </div>
+  <div class="form-label-group">
+    <select required class="form-control" name="position" >
+      <option value="" disabled>Select a position for Candidate</option>
+      <!-- For loop to generate positions -->
+    </select>
+  </div>
+  <div class="col-md-12 text-center">
+    <button [disabled]="!registerCandidate.valid" type="submit" class="btn btn-block mybtn btn-primary text-uppercase">Register</button>
+  </div>
+</form>
