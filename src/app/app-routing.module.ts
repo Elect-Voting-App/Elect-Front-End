@@ -12,6 +12,7 @@ import { RegisterVoterComponent } from './admin/modules/register-voter/register-
 import { RemoveVoterComponent } from './admin/modules/remove-voter/remove-voter.component';
 import { ViewAllVotersComponent } from './admin/modules/view-all-voters/view-all-voters.component';
 import { ResetVoterPasswordComponent } from './admin/modules/reset-voter-password/reset-voter-password.component';
+import { ViewAllCandidatesComponent } from './admin/modules/view-all-candidates/view-all-candidates.component';
 
 //All Routes in the Application
 const routes: Routes = [
@@ -26,7 +27,8 @@ const routes: Routes = [
       { path: 'register-voter', component: RegisterVoterComponent },
       { path: 'remove-voter', component: RemoveVoterComponent },
       { path: 'view-all-voters', component: ViewAllVotersComponent },
-      { path: 'reset-voter-password', component: ResetVoterPasswordComponent }
+      { path: 'reset-voter-password', component: ResetVoterPasswordComponent },
+      { path: 'view-all-candidates', component: ViewAllCandidatesComponent }
     ]
   },
   { path: '', pathMatch: 'full', redirectTo: '/admin' }
