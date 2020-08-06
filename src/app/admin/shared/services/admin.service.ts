@@ -74,4 +74,13 @@ export class AdminService {
     return this.http.get<any>(`${config.adminApiUrl}/all-candidates`);
   }
 
+  //Search Candidate
+  searchCandidate(candidateData) {
+    return this.http.post<any>(`${config.adminApiUrl}/candidateSearch`, candidateData);
+  }
+
+  deleteCandidate(id) {
+    return this.http.delete<any>(`${config.adminApiUrl}/remove-candidate/${id}`);
+  }
+
 }
