@@ -21,6 +21,8 @@ export class RegisterCandidateComponent implements OnInit {
   constructor(private formBuilder: FormBuilder, private adminService: AdminService) { }
 
   ngOnInit(): void {
+    this.isLoading = true;
+    this.getPositions();
   }
 
   //Declaring Variables
@@ -29,6 +31,7 @@ export class RegisterCandidateComponent implements OnInit {
   isLoading = false;
   hasErrorMessage: string;
   hasSuccessMessage: string;
+  Positions: any;
 
   registerError() {
     return this.hasError;
@@ -44,7 +47,25 @@ export class RegisterCandidateComponent implements OnInit {
 
   registerCandidate = this.formBuilder.group({
     firstname: ['', [Validators.required, Validators.nullValidator]],
-    lastname: ['', [Validators.required, Validators.nullValidator]]
+    lastname: ['', [Validators.required, Validators.nullValidator]],
+    position: ['',[Validators.required]]
   });
+
+  getPositions() {
+    this.adminService.getPositions()
+    .subscribe(
+      success => {
+        if (success.status) {
+          this.isLoading = false;
+          this.Positions = success.data;
+        } else {
+          this.isLoading = false;
+          this.hasError = true;
+          this.hasErrorMessage = success.message;
+        }
+      },
+      error => console.log('Error', error)
+    );
+  }
 
 }

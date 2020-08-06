@@ -88,4 +88,8 @@ export class AdminService {
     return this.http.delete<any>(`${config.adminApiUrl}/remove-candidate/${id}`);
   }
 
+  getPositions() {
+    return this.http.get<any>(`${config.adminApiUrl}/positions`);
+  }
+
 }
