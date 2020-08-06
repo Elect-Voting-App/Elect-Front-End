@@ -55,8 +55,8 @@
       <tr *ngFor="let candidate of Candidates">
         <td class="d-none"> <input type="text" #delete readonly value="{{candidate.id}}"></td>
         <td> {{ candidate.firstname }} {{ candidate.lastname }} </td>
-        <td> {{ candidate.category }} </td>
-        <td> {{ candidate.position }} </td>
+        <td> {{ candidate.category_name }} </td>
+        <td> {{ candidate.position_name }} </td>
         <td> <button mat-raised-button (click)="onDelete(delete.value)"> DELETE </button> </td>
       </tr>
     </tbody>

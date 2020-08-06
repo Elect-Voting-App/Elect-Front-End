@@ -57,7 +57,7 @@ export class AdminService {
 
   //Search voter
   searchVoter(voterEmail) {
-    return this.http.post<any>(`${config.adminApiUrl}/voterSearch`, voterEmail);
+    return this.http.post<any>(`${config.adminApiUrl}/search-voter`, voterEmail);
   }
 
   //Reset Voter Password
