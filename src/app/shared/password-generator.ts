@@ -60,7 +60,7 @@ export class PasswordGenerator {
 	
 	//generating random Symbol
 	private getRandomSymbol() {
-		const symbols = '!@#$%^&*(){}[]=<>/,.'
+		const symbols = '!@#$%^&*(){}[]=<>/_.'
 		return symbols[Math.floor(Math.random() * symbols.length)];
 	}
 

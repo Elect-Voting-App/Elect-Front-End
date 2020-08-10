@@ -13,6 +13,12 @@
 
 <!-- Searching for CSV File -->
 <div class="search">
+  <div *ngIf="registerError()">
+    <p class="alert alert-danger text-center" *ngFor="let error of hasErrorMessage;"> {{error}} </p>
+  </div>
+  <div *ngIf="registerSuccess()">
+    <p class="alert alert-success text-center"> {{hasSuccessMessage}} </p>
+  </div>
   <div class="custom-file">
     <input type="file" #fileImportInput name="file" class="custom-file-input form-control" id="inputFile"
       placeholder="Import CSV file" (change)="fileChangeListener($event)">

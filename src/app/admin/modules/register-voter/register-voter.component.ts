@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgxCsvParser, NgxCSVParserError } from 'ngx-csv-parser';
 import { PasswordGenerator } from 'src/app/shared/password-generator';
 import { AdminService } from '../../shared/services/admin.service';
+import * as $ from 'jquery';
 
 @Component({
   selector: 'app-register-voter',
@@ -13,6 +14,18 @@ export class RegisterVoterComponent implements OnInit {
   csvRecords: any[] = [];
   header = true;
   fileLoaded = false;
+  hasError = false;
+  hasSuccess = false;
+  isLoading = false;
+  hasErrorMessage: any[] = [];
+  hasSuccessMessage: string;
+
+  registerError() {
+    return this.hasError;
+  }
+  registerSuccess() {
+    return this.hasSuccess;
+  }
 
   //Declaring Password Generator
   generator = new PasswordGenerator();
@@ -41,7 +54,7 @@ export class RegisterVoterComponent implements OnInit {
           let x = JSON.parse(JSON.stringify(row).replace(/}/g, '').concat(',"password":"', this.generator.generate(), '"}'));
           actualResult.push(x);
         });
-        console.log('Result', actualResult);
+        console.log('Result', result);
         this.csvRecords = actualResult;
       }, (error: NgxCSVParserError) => {
         this.isLoading = false;
@@ -55,25 +68,54 @@ export class RegisterVoterComponent implements OnInit {
     const exporter = new TableCSVExporter(dataTable);
     const csvOutput = exporter.convertToCSV();
     const csvBlob = new Blob([csvOutput], { type: "text/csv" });
-    
-    const formData = new FormData();
-    formData.append('file', csvBlob, 'export.csv');
+    const csvFile = new File([csvBlob], 'export.csv');
 
-    //Making file upload request
-    this.adminService.uploadBlob(formData)
-    .subscribe(
-      success => {
-        console.log(success);
-      },
-      error => console.error('Error', error)
-    );
-
+    this.ngxCsvParser.parse(csvFile, { header: this.header, delimiter: ',' })
+      .pipe().subscribe((result: Array<any>) => {
+        this.fileLoaded = false;
+        for (let i = 0; i < result.length; i++) {
+          const element = result[i];
+          // console.log(element);
+          this.adminService.registerVoter(element)
+            .subscribe(
+              success => {
+                if (success.status) {
+                  this.adminService.sendVoterEmail(element).subscribe(
+                    success => {
+                      if (success.status) {
+                        this.hasSuccess = true;
+                        this.hasSuccessMessage = success.message;
+                        this.isLoading = false;
+                        return;
+                      } else {
+                        this.hasError = true;
+                        this.hasErrorMessage.push(success.message);
+                        this.isLoading = false;
+                        console.log(this.hasErrorMessage);
+                        return;
+                      }
+                    },
+                    error => console.log('Error', error)
+                  );
+                } else {
+                  this.hasError = true;
+                  this.hasErrorMessage.push(success.message);
+                  this.isLoading = false;
+                  console.log(this.hasErrorMessage);
+                  console.log('Failed ', success)
+                  return;
+                }
+              },
+              error => console.error('Error', error)
+            );
+        }
+      }, (error: NgxCSVParserError) => {
+        console.log('Error', error);
+      });
   }
 
   ngOnInit(): void {
   }
-
-  isLoading = false;
 
   loadingRequest() {
     return this.isLoading;

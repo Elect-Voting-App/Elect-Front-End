@@ -44,12 +44,17 @@ export class AdminService {
     return this.http.post<any>(`${config.adminMailerUrl}/update-pass`,adminData);
   }
 
+  /*==== VOTERS ====*/
   //Send Generated CSV blob 
-  uploadBlob(formData) {
-    return this.http.post<any>(`${config.adminApiUrl}/register-voter`,formData);
+  registerVoter(voterData) {
+    return this.http.post<any>(`${config.adminApiUrl}/register-voter`,voterData);
   }
 
-  /*==== VOTERS ====*/
+  //Send Voter Email
+  sendVoterEmail(voterData) {
+    return this.http.post<any>(`${config.adminMailerUrl}/voter`,voterData);
+  }
+
   //Get all Voters
   getAllVoters() {
     return this.http.get<any>(`${config.adminApiUrl}/all-voters`);
@@ -66,7 +71,7 @@ export class AdminService {
   }
 
   sendVoterResetEmail(voterData) {
-    return this.http.post<any>(`${config.adminMailerUrl}/update-voter-pass`, voterData);
+    return this.http.post<any>(`${config.adminMailerUrl}/update-pass`, voterData);
   }
 
   //Delete Voter
