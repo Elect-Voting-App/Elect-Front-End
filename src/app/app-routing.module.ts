@@ -15,6 +15,7 @@ import { ResetVoterPasswordComponent } from './admin/modules/reset-voter-passwor
 import { ViewAllCandidatesComponent } from './admin/modules/view-all-candidates/view-all-candidates.component';
 import { RegisterCandidateComponent } from './admin/modules/register-candidate/register-candidate.component';
 import { RemoveCandidateComponent } from './admin/modules/remove-candidate/remove-candidate.component';
+import { VoterLoginComponent } from './voter/voter-login/voter-login.component';
 
 //All Routes in the Application
 const routes: Routes = [
@@ -35,7 +36,8 @@ const routes: Routes = [
       { path: 'remove-candidate', component: RemoveCandidateComponent }
     ]
   },
-  { path: '', pathMatch: 'full', redirectTo: '/admin' }
+  { path: 'login', component: VoterLoginComponent },
+  { path: '', pathMatch: 'full', redirectTo: '/login' }
 ];
 
 @NgModule({
