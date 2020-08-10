@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { AuthService } from '../shared/services/auth.service';
 import { Router } from '@angular/router';
+import { TimeOut } from 'src/app/shared/timeouts';
 
 @Component({
   selector: 'app-login',
@@ -32,6 +33,8 @@ export class LoginComponent implements OnInit {
 
   hasError = false
   hasErrorMessage: string;
+
+  timeOut = new TimeOut();
   
   //checking for Failed Login
   loginError() {
@@ -50,6 +53,7 @@ export class LoginComponent implements OnInit {
           } else {
             this.hasError = true;
             this.hasErrorMessage = success.message
+            this.timeOut.displayErrorTimeout();
           }
         },
         error => console.error('Error', error)

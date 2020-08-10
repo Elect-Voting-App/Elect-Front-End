@@ -22,6 +22,11 @@ export class AuthService {
     return this._http.post<any>(`${config.adminApiUrl}/login`, loginData);
   }
 
+  //Login http post request to the server for voter
+  voterLogin(loginData) {
+    return this._http.post<any>(`${config.voterApiUrl}/login`, loginData);
+  }
+
   //Logout http post request to the server
   logout() {
     return this._http.post<any>(`${config.adminApiUrl}/logout`, {

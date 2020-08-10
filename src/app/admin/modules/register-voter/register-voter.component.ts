@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgxCsvParser, NgxCSVParserError } from 'ngx-csv-parser';
 import { PasswordGenerator } from 'src/app/shared/password-generator';
 import { AdminService } from '../../shared/services/admin.service';
-import * as $ from 'jquery';
+import { TimeOut } from 'src/app/shared/timeouts';
 
 @Component({
   selector: 'app-register-voter',
@@ -23,12 +23,14 @@ export class RegisterVoterComponent implements OnInit {
   registerError() {
     return this.hasError;
   }
+
   registerSuccess() {
     return this.hasSuccess;
   }
 
   //Declaring Password Generator
   generator = new PasswordGenerator();
+  timer = new TimeOut();
 
 
   constructor(private ngxCsvParser: NgxCsvParser, private adminService: AdminService) {
@@ -101,6 +103,7 @@ export class RegisterVoterComponent implements OnInit {
                   this.hasError = true;
                   this.hasErrorMessage.push(success.message);
                   this.isLoading = false;
+                  this.timer.displayErrorTimeout();
                   console.log(this.hasErrorMessage);
                   console.log('Failed ', success)
                   return;
