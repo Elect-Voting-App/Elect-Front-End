@@ -45,6 +45,7 @@ export class VoterLoginComponent implements OnInit {
     this.authService.voterLogin(this.voterLoginForm.value)
     .subscribe(
       success => {
+        console.log(success)
         if (success.status) {
           this.authService.doVoterLogin(success);
           this.voterLoginForm.reset();
