@@ -40,6 +40,19 @@ export class AuthService {
       }));
   }
 
+  //Logout http post request to the server for voter
+  voterLogout() {
+    return this._http.post<any>(`${config.voterApiUrl}/logout`, {
+      'refreshToken': this.getRefreshToken()
+    }).pipe(
+      tap(() => this.doLogoutUser()),
+      mapTo(true),
+      catchError(error => {
+        alert(error.error);
+        return of(false);
+      }));
+  }
+
   isLoggedIn() {
     return !!this.getJwtToken();
   }
@@ -48,7 +61,7 @@ export class AuthService {
     return localStorage.getItem(this.JWT_TOKEN);
   }
 
-  //Private method for getting user information
+  //method for getting user information
   getUserInfo() {
     let user = JSON.parse(localStorage.getItem("USER"));
     return user;

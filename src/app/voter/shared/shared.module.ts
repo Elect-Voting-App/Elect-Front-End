@@ -13,6 +13,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatMenuModule } from '@angular/material/menu';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { AuthService } from 'src/app/admin/shared/services/auth.service';
 
 
 
@@ -34,6 +35,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
   providers: [
     AuthGuard,
     AdminService,
+    AuthService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: TokenInterceptor,
