@@ -15,6 +15,7 @@ import { MatMenuModule } from '@angular/material/menu';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { AuthService } from 'src/app/admin/shared/services/auth.service';
 import { VoterChangePasswordComponent } from '../voter-change-password/voter-change-password.component';
+import { VoterService } from './services/voter.service';
 
 
 
@@ -38,6 +39,7 @@ import { VoterChangePasswordComponent } from '../voter-change-password/voter-cha
     AuthGuard,
     AdminService,
     AuthService,
+    VoterService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: TokenInterceptor,

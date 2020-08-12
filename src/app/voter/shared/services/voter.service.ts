@@ -9,5 +9,8 @@ export class VoterService {
 
   constructor(private http: HttpClient) { }
 
-
+  changePassword(voterData) {
+    console.log('Got Here')
+    return this.http.post<any>(`${config.voterApiUrl}/password-change`, voterData);
+  }  
 }

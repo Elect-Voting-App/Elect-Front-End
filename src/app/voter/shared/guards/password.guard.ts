@@ -13,7 +13,7 @@ export class PasswordGuard implements CanActivate {
   voter = this.authService.getUserInfo();
 
   canActivate() {
-    if (this.voter.initialLogin) {
+    if (this.voter.initialLogin == 1) {
       this.router.navigate(['voter-change-pass']);
     }
     return !this.voter.initialLogin;
