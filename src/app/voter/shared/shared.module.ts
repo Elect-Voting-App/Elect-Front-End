@@ -14,13 +14,15 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatMenuModule } from '@angular/material/menu';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { AuthService } from 'src/app/admin/shared/services/auth.service';
+import { VoterChangePasswordComponent } from '../voter-change-password/voter-change-password.component';
 
 
 
 @NgModule({
   declarations: [
     VotingComponent,
-    HeaderComponent
+    HeaderComponent,
+    VoterChangePasswordComponent
   ],
   imports: [
     CommonModule,

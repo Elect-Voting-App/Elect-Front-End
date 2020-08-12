@@ -17,6 +17,8 @@ import { RegisterCandidateComponent } from './admin/modules/register-candidate/r
 import { RemoveCandidateComponent } from './admin/modules/remove-candidate/remove-candidate.component';
 import { VoterLoginComponent } from './voter/voter-login/voter-login.component';
 import { VotingComponent } from './voter/voting/voting.component';
+import { VoterChangePasswordComponent } from './voter/voter-change-password/voter-change-password.component';
+import { PasswordGuard } from './voter/shared/guards/password.guard';
 
 //All Routes in the Application
 const routes: Routes = [
@@ -38,7 +40,8 @@ const routes: Routes = [
     ]
   },
   { path: 'login', component: VoterLoginComponent },
-  { path: 'voting', component: VotingComponent },
+  { path: 'voting', component: VotingComponent, canActivate: [PasswordGuard] },
+  { path: 'voter-change-pass', component: VoterChangePasswordComponent },
   { path: '', pathMatch: 'full', redirectTo: '/login' }
 ];
 
