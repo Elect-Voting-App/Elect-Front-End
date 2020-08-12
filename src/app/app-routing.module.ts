@@ -16,6 +16,7 @@ import { ViewAllCandidatesComponent } from './admin/modules/view-all-candidates/
 import { RegisterCandidateComponent } from './admin/modules/register-candidate/register-candidate.component';
 import { RemoveCandidateComponent } from './admin/modules/remove-candidate/remove-candidate.component';
 import { VoterLoginComponent } from './voter/voter-login/voter-login.component';
+import { VotingComponent } from './voter/voting/voting.component';
 
 //All Routes in the Application
 const routes: Routes = [
@@ -37,6 +38,7 @@ const routes: Routes = [
     ]
   },
   { path: 'login', component: VoterLoginComponent },
+  { path: 'voting', component: VotingComponent },
   { path: '', pathMatch: 'full', redirectTo: '/login' }
 ];
 

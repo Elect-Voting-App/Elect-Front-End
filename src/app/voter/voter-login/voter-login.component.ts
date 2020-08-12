@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/admin/shared/services/auth.service';
 import { TimeOut } from 'src/app/shared/timeouts';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-voter-login',
@@ -19,7 +20,7 @@ export class VoterLoginComponent implements OnInit {
     return this.voterLoginForm.get('password');
   }
 
-  constructor(private login: FormBuilder, private authService: AuthService) { }
+  constructor(private login: FormBuilder, private authService: AuthService, private router: Router) { }
 
   ngOnInit(): void {
   }
@@ -48,6 +49,7 @@ export class VoterLoginComponent implements OnInit {
           this.authService.doVoterLogin(success);
           this.voterLoginForm.reset();
           //Route Voter to voting screen
+          this.router.navigate(['voting']);
           console.log('Successfull')
         } else {
           this.hasError = true;
