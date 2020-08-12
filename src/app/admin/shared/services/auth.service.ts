@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { of,Observable } from 'rxjs';
+import { of, Observable } from 'rxjs';
 import { catchError, mapTo, tap } from 'rxjs/operators';
 import { config } from '../../../shared/config';
 import { Tokens } from '../models/tokens';
@@ -16,7 +16,7 @@ export class AuthService {
   private readonly USER = 'USER';
 
   constructor(private _http: HttpClient) { }
-  
+
   //Login http post request to the server
   login(loginData) {
     return this._http.post<any>(`${config.adminApiUrl}/login`, loginData);
@@ -62,10 +62,15 @@ export class AuthService {
     }));
   }
 
-  //Private Method to take tokens and do login
+  //Method to take tokens and do login
   doLoginUser(tokens: Tokens) {
     this.storeTokens(tokens);
     this.storeUserInfo(tokens);
+  }
+
+  doVoterLogin(tokens: Tokens) {
+    this.storeTokens(tokens);
+    this.storeVoterInfo(tokens);
   }
 
   //Private Method to logout 
@@ -87,6 +92,16 @@ export class AuthService {
       role: tokens.role
     }
     localStorage.setItem(this.USER, JSON.stringify(user));
+  }
+
+  private storeVoterInfo(tokens: Tokens) {
+    let voter = {
+      name: tokens.name,
+      studentID: tokens.studentID,
+      hall: tokens.hall,
+      initialLogin: tokens.initialLogin
+    }
+    localStorage.setItem(this.USER, JSON.stringify(voter));
   }
 
   //Getting refresh token

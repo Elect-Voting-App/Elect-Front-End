@@ -45,9 +45,10 @@ export class VoterLoginComponent implements OnInit {
     .subscribe(
       success => {
         if (success.status) {
-          this.authService.doLoginUser(success);
+          this.authService.doVoterLogin(success);
           this.voterLoginForm.reset();
           //Route Voter to voting screen
+          console.log('Successfull')
         } else {
           this.hasError = true;
           this.hasErrorMessage = success.message
