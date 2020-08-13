@@ -7,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class VotingComponent implements OnInit {
 
-sideBarOpen = true;
+sideBarOpen = false;
 
   constructor() { }
 

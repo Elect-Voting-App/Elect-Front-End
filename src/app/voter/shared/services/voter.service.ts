@@ -13,4 +13,8 @@ export class VoterService {
     console.log('Got Here')
     return this.http.post<any>(`${config.voterApiUrl}/password-change`, voterData);
   }  
+
+  getCategories() {
+    return this.http.get<any>(`${config.voterApiUrl}/getCategory`);
+  }
 }

@@ -1,0 +1,39 @@
+/* div { */
+  /* border: 1px solid black; */
+/* } */
+
+.category, .position {
+  padding: 5px;
+  border: 1px solid #c9ccd0;
+  background-color: #ffffff;
+  border-radius: 3px;
+}
+
+.category-name {
+  color: #fff;
+  background-color: #343a40;
+  padding: 5px;
+  border-radius: 3px;
+  font-size: 20px;
+  margin-bottom: 5px;
+}
+
+.position-name {
+  color: #fff;
+  background-color: #3c4854;
+  padding: 5px;
+  border-radius: 5px;
+  font-size: 16px;
+  margin-bottom: 5px;
+}
+
+.candidates {
+  margin-right: 5px;
+  padding: 5px;
+  border-radius: 3px;
+  border: 1px solid #e9ecef;
+}
+
+.candidates:last-child {
+  margin-right: 0;
+}
