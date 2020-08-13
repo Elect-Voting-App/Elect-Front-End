@@ -19,6 +19,7 @@ import { VoterLoginComponent } from './voter/voter-login/voter-login.component';
 import { VotingComponent } from './voter/voting/voting.component';
 import { VoterChangePasswordComponent } from './voter/voter-change-password/voter-change-password.component';
 import { PasswordGuard } from './voter/shared/guards/password.guard';
+import { VoteComponent } from './voter/modules/vote/vote.component';
 
 //All Routes in the Application
 const routes: Routes = [
@@ -40,7 +41,12 @@ const routes: Routes = [
     ]
   },
   { path: 'login', component: VoterLoginComponent },
-  { path: 'voting', component: VotingComponent, canActivate: [PasswordGuard] },
+  {
+    path: 'voting', component: VotingComponent, canActivate: [PasswordGuard],
+    children: [
+      { path: '', component: VoteComponent }
+    ]
+  },
   { path: 'voter-change-pass', component: VoterChangePasswordComponent },
   { path: '', pathMatch: 'full', redirectTo: '/login' }
 ];
@@ -51,4 +57,4 @@ const routes: Routes = [
 })
 
 export class AppRoutingModule { }
-export const routingComponents = [LoginComponent, VoterLoginComponent]
+export const routingComponents = [LoginComponent, VoterLoginComponent, VoterChangePasswordComponent]

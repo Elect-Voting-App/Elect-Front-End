@@ -10,7 +10,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DefaultModule } from './admin/layouts/default/default.module';
 import { AuthGuard } from './admin/shared/guards/auth.guard';
 import { NgxCsvParserModule } from 'ngx-csv-parser';
-import { SharedModule } from './voter/shared/shared.module';
+import { VotingModule } from './voter/voting/voting.module';
 
 @NgModule({
   declarations: [
@@ -25,7 +25,7 @@ import { SharedModule } from './voter/shared/shared.module';
     BrowserAnimationsModule,
     DefaultModule,
     NgxCsvParserModule,
-    SharedModule
+    VotingModule
   ],
   providers: [AuthGuard],
   bootstrap: [AppComponent]

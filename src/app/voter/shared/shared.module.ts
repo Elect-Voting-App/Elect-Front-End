@@ -1,29 +1,22 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
-import { VotingComponent } from '../voting/voting.component';
-import { AuthGuard } from 'src/app/admin/shared/guards/auth.guard';
-import { AdminService } from 'src/app/admin/shared/services/admin.service';
-import { HTTP_INTERCEPTORS } from '@angular/common/http';
-import { TokenInterceptor } from 'src/app/shared/token.interceptor';
 import { ReactiveFormsModule } from '@angular/forms';
-import { HeaderComponent } from './components/header/header.component';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatMenuModule } from '@angular/material/menu';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import { AuthService } from 'src/app/admin/shared/services/auth.service';
-import { VoterChangePasswordComponent } from '../voter-change-password/voter-change-password.component';
-import { VoterService } from './services/voter.service';
+import { VotingSidebarComponent } from './components/voting-sidebar/voting-sidebar.component';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { VotingHeaderComponent } from './components/voting-header/voting-header.component';
 
 
 
 @NgModule({
   declarations: [
-    VotingComponent,
-    HeaderComponent,
-    VoterChangePasswordComponent
+    VotingHeaderComponent,
+    VotingSidebarComponent
   ],
   imports: [
     CommonModule,
@@ -33,18 +26,12 @@ import { VoterService } from './services/voter.service';
     MatIconModule,
     MatButtonModule,
     MatMenuModule,
-    FlexLayoutModule
+    FlexLayoutModule,
+    MatSidenavModule
   ],
-  providers: [
-    AuthGuard,
-    AdminService,
-    AuthService,
-    VoterService,
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: TokenInterceptor,
-      multi: true
-    }
+  exports: [
+    VotingHeaderComponent,
+    VotingSidebarComponent
   ]
 })
 export class SharedModule { }
