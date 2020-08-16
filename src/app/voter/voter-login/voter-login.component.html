@@ -9,8 +9,8 @@
               <div *ngIf="loginError()">
                 <p class="alert alert-danger text-center">{{hasErrorMessage}}</p>
               </div>
-              <img class="logo mx-auto" src="assets/img/logo.jpg"><br />
-              <span class="d-inline navbar-brand brand h1">SIGN IN</span>
+              <img class="logo mx-auto" src="assets/img/logo.png"><br />
+              <span class="d-inline navbar-brand brand h1 mx-auto">SIGN IN</span>
             </div>
           </div>
           <form [formGroup]="voterLoginForm" (ngSubmit)=onSubmit()>

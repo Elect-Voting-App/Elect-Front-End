@@ -109,4 +109,8 @@ export class AdminService {
     return this.http.post<any>(`${config.adminApiUrl}/register-candidate`, candidateData);
   }
 
+  changePassword(adminData) {
+    return this.http.post<any>(`${config.adminApiUrl}/password-change`, adminData);
+  }
+
 }

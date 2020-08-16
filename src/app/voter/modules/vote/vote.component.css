@@ -28,7 +28,7 @@
 }
 
 .candidates {
-  margin-right: 5px;
+  margin: auto 5px;
   padding: 5px;
   border-radius: 3px;
   border: 1px solid #e9ecef;
@@ -36,4 +36,21 @@
 
 .candidates:last-child {
   margin-right: 0;
+}
+
+.avatar {
+  border-radius: 50%;
+  margin-left: 25px;
+  width: 90px;
+
+}
+
+.mybtn {
+  border-radius: 50px;
+  width: 80px;
+  background-color: #009afe;
+}
+
+.candidate-name {
+  font-size: 18px;
 }

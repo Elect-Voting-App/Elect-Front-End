@@ -17,13 +17,15 @@ import { VoterService } from '../shared/services/voter.service';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { TokenInterceptor } from 'src/app/shared/token.interceptor';
 import { VoteComponent } from '../modules/vote/vote.component';
+import { ViewResultsComponent } from '../modules/view-results/view-results.component';
 
 
 
 @NgModule({
   declarations: [
     VotingComponent,
-    VoteComponent
+    VoteComponent,
+    ViewResultsComponent
   ],
   imports: [
     CommonModule,

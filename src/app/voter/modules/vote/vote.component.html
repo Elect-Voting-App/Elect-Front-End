@@ -1,33 +1,23 @@
 <div class="container">
-  <div class="category shadow mb-4">
-    <div class="category-name">Category Name</div>
-    <div class="position mb-3">
-      <div class="position-name">Position Name</div>
+  <div class="category shadow mb-4" *ngFor="let category of groupedData;">
+    <div class="category-name"> {{category.category_name}} </div>
+    <div class="position mb-3" *ngFor="let position of category.positions; let j = index;">
+      <div class="position-name"> {{position.position_name}} </div>
       <div class="container">
         <div class="row">
-          <div class="candidates shadow-sm col-md">Candidates</div>
-          <div class="candidates shadow-sm col-md">Candidates</div>
-          <div class="candidates shadow-sm col-md">Candidates</div>
-        </div>
-      </div>
-    </div>
-    <div class="position mb-3">
-      <div class="position-name">Position Name</div>
-      <div class="container">
-        <div class="row">
-          <div class="candidates shadow-sm col-md">Candidates</div>
-          <div class="candidates shadow-sm col-md">Candidates</div>
-          <div class="candidates shadow-sm col-md">Candidates</div>
-        </div>
-      </div>
-    </div>
-    <div class="position mb-3">
-      <div class="position-name">Position Name</div>
-      <div class="container">
-        <div class="row">
-          <div class="candidates shadow-sm col-md">Candidates</div>
-          <div class="candidates shadow-sm col-md">Candidates</div>
-          <div class="candidates shadow-sm col-md">Candidates</div>
+          <div class="candidates shadow-sm col-md" *ngFor="let candidate of position.candidates">
+            <div class="row">
+              <div class="col-4 d-flex align-items-center">
+                <img src="assets/admin/account_avatar.png" class="avatar">
+              </div>
+              <div class="col ml-2">
+                <div class="candidate-name">{{candidate.candidate_name}}</div>
+                <div>
+                  <button type="submit" class="btn btn-block mybtn btn-primary text-uppercase">Vote</button>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>

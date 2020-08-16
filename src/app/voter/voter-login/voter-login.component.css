@@ -4,8 +4,7 @@
   width: 100%;
   background-image: url('/assets/admin/background.jpg');
   background-repeat: round;
-  padding-top: 6.2rem;
-  padding-bottom: 6.2rem;
+  padding-top: 3.2rem;
 }
 
 a {
@@ -44,5 +43,3 @@ a {
 .brand {
   font-size: 2.5rem;
 }
-
-/* RESPONSIVE SYLING */

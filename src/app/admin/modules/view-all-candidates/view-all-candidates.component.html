@@ -22,14 +22,16 @@
     <thead class="thead-dark">
       <tr>
         <th scope="col"> # </th>
+        <th scope="col"> Image</th>
         <th scope="col"> Fullname </th>
-        <th scope="col"> category </th>
-        <th scope="col"> position </th>
+        <th scope="col"> Category </th>
+        <th scope="col"> Position </th>
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let candidate of Candidates; let i = index;">
         <td> {{ i+1 }}</td>
+        <td><img class="avatar mx-auto" src="assets/admin/account_avatar.png"></td>
         <td> {{ candidate.firstname }} {{ candidate.lastname }} </td>
         <td> {{ candidate.category_name }} </td>
         <td> {{ candidate.position_name }} </td>

@@ -20,12 +20,15 @@ import { VotingComponent } from './voter/voting/voting.component';
 import { VoterChangePasswordComponent } from './voter/voter-change-password/voter-change-password.component';
 import { PasswordGuard } from './voter/shared/guards/password.guard';
 import { VoteComponent } from './voter/modules/vote/vote.component';
+import { ViewResultsComponent } from './voter/modules/view-results/view-results.component';
+import { ChangeInitialPassComponent } from './admin/change-initial-pass/change-initial-pass.component';
+import { AdminPasswordGuard } from './admin/shared/guards/admin-password.guard';
 
 //All Routes in the Application
 const routes: Routes = [
   { path: 'admin/login', component: LoginComponent, canActivate: [AuthGuard] },
   {
-    path: 'admin', component: DefaultComponent,
+    path: 'admin', component: DefaultComponent, canActivate: [AdminPasswordGuard],
     children: [
       { path: '', component: DashboardComponent, canActivate: [DashboardGuard], canLoad: [DashboardGuard] },
       { path: 'register-admin', component: RegisterAdminComponent },
@@ -40,6 +43,7 @@ const routes: Routes = [
       { path: 'remove-candidate', component: RemoveCandidateComponent }
     ]
   },
+  {path: 'change-initial-password', component: ChangeInitialPassComponent},
   { path: 'login', component: VoterLoginComponent },
   {
     path: 'voting', component: VotingComponent, canActivate: [PasswordGuard],
@@ -48,6 +52,7 @@ const routes: Routes = [
     ]
   },
   { path: 'voter-change-pass', component: VoterChangePasswordComponent },
+  { path: 'view-result', component: ViewResultsComponent },
   { path: '', pathMatch: 'full', redirectTo: '/login' }
 ];
 
@@ -57,4 +62,4 @@ const routes: Routes = [
 })
 
 export class AppRoutingModule { }
-export const routingComponents = [LoginComponent, VoterLoginComponent, VoterChangePasswordComponent]
+export const routingComponents = [LoginComponent, ChangeInitialPassComponent , VoterLoginComponent, VoterChangePasswordComponent]

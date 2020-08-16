@@ -15,6 +15,14 @@ export class VoterService {
   }  
 
   getCategories() {
-    return this.http.get<any>(`${config.voterApiUrl}/getCategory`);
+    return this.http.post<any>(`${config.voterApiUrl}/categories`,null);
+  }
+
+  getPositions() {
+    return this.http.post<any>(`${config.voterApiUrl}/positions`,null);
+  }
+
+  getCandidates() {
+    return this.http.post<any>(`${config.voterApiUrl}/candidates`, null);
   }
 }
