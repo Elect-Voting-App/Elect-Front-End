@@ -15,7 +15,7 @@
           </div>
           <form [formGroup]="voterLoginForm" (ngSubmit)=onSubmit()>
             <div class="form-label-group">
-              <input type="text" name="username" class="form-control" placeholder="Student Id"
+              <input type="text" name="username" class="form-control" id="inputUsername" placeholder="Student Id"
                 formControlName="username" required [class.is-invalid]="username.invalid && username.touched">
               <div *ngIf="username.invalid && username.touched">
                 <small *ngIf="username.errors?.required" class="text-danger"> Student ID is required</small>
@@ -24,7 +24,7 @@
               </div>
             </div>
             <div class="form-label-group">
-              <input type="password" name="password" class="form-control" placeholder="Password"
+              <input type="password" name="password" id="inputPassword" class="form-control" placeholder="Password"
                 formControlName="password" required [class.is-invalid]="password.invalid && password.touched">
               <div *ngIf="password.invalid && password.touched">
                 <small *ngIf="password.errors?.required" class="text-danger"> Password is required</small>
