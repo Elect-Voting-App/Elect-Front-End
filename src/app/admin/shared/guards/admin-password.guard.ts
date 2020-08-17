@@ -1,21 +1,27 @@
 import { Injectable } from '@angular/core';
-import { CanActivate, Router} from '@angular/router';
+import { CanActivate, CanLoad, Router} from '@angular/router';
 import { AuthService} from '../services/auth.service';
 
 @Injectable({
   providedIn: 'root'
 })
-export class AdminPasswordGuard implements CanActivate {
+export class AdminPasswordGuard implements CanActivate, CanLoad {
   constructor(private authService: AuthService, private router: Router) { }
 
   // Getting voter Info
   admin = this.authService.getUserInfo();
 
   canActivate() {
-    if (this.admin.initialLogin == 1) {
+    return this.canLoad();
+  }
+  
+  canLoad() {
+    if (!this.authService.isLoggedIn()) {
+      this.router.navigate(['admin/login'])
+    } else if (this.admin.initialLogin)  {
       this.router.navigate(['change-initial-password']);
     }
-    return !this.admin.initialLogin;
+    return this.authService.isLoggedIn()
   }
   
 }

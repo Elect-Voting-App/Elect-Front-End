@@ -53,7 +53,7 @@ export class ChangeInitialPassComponent implements OnInit {
 
   onSubmit() {
     let requestValues = {
-      studentID: this.admin.email,
+      email: this.admin.email,
       oldPassword: this.changePassForm.value.oldPassword,
       newPassword: this.changePassForm.value.newPassword,
       confirmPassword: this.changePassForm.value.confirmPassword
@@ -68,7 +68,7 @@ export class ChangeInitialPassComponent implements OnInit {
           .subscribe(
             success => {
               if (success) {
-                this.router.navigate(['login']);
+                this.router.navigate(['admin/login']);
               }
             },
             error => console.error('Error', error)

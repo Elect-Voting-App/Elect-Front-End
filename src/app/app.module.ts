@@ -11,13 +11,11 @@ import { DefaultModule } from './admin/layouts/default/default.module';
 import { AuthGuard } from './admin/shared/guards/auth.guard';
 import { NgxCsvParserModule } from 'ngx-csv-parser';
 import { VotingModule } from './voter/voting/voting.module';
-import { ChangeInitialPassComponent } from './admin/change-initial-pass/change-initial-pass.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    routingComponents,
-    ChangeInitialPassComponent
+    routingComponents
   ],
   imports: [
     BrowserModule,

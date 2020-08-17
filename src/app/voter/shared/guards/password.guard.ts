@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
-import { CanActivate, Router } from '@angular/router';
+import { CanActivate, Router, CanLoad } from '@angular/router';
 import { AuthService } from 'src/app/admin/shared/services/auth.service';
 
 @Injectable({
   providedIn: 'root'
 })
-export class PasswordGuard implements CanActivate {
+export class PasswordGuard implements CanActivate, CanLoad {
 
   constructor(private authService: AuthService, private router: Router) { }
 
@@ -13,10 +13,17 @@ export class PasswordGuard implements CanActivate {
   voter = this.authService.getUserInfo();
 
   canActivate() {
-    if (this.voter.initialLogin == 1) {
-      this.router.navigate(['voter-change-pass']);
-    }
-    return !this.voter.initialLogin;
+    return this.canLoad();
   }
+
+  canLoad() {
+    if (!this.authService.isLoggedIn()) {
+      this.router.navigate(['/login'])
+    } else if (this.voter.initialLogin) {
+      this.router.navigate(['voter-change-password']);
+    }
+    return this.authService.isLoggedIn()
+  }
+
 
 }

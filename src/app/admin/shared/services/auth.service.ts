@@ -102,7 +102,8 @@ export class AuthService {
     let user = {
       name: tokens.name,
       email: tokens.email,
-      role: tokens.role
+      role: tokens.role,
+      initialLogin: tokens.initialLogin
     }
     localStorage.setItem(this.USER, JSON.stringify(user));
   }

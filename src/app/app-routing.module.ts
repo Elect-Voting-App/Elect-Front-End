@@ -28,7 +28,7 @@ import { AdminPasswordGuard } from './admin/shared/guards/admin-password.guard';
 const routes: Routes = [
   { path: 'admin/login', component: LoginComponent, canActivate: [AuthGuard] },
   {
-    path: 'admin', component: DefaultComponent, canActivate: [AdminPasswordGuard],
+    path: 'admin', component: DefaultComponent, canActivate: [ AdminPasswordGuard], canLoad: [AdminPasswordGuard],
     children: [
       { path: '', component: DashboardComponent, canActivate: [DashboardGuard], canLoad: [DashboardGuard] },
       { path: 'register-admin', component: RegisterAdminComponent },
@@ -51,7 +51,7 @@ const routes: Routes = [
       { path: '', component: VoteComponent }
     ]
   },
-  { path: 'voter-change-pass', component: VoterChangePasswordComponent },
+  { path: 'voter-change-password', component: VoterChangePasswordComponent },
   { path: 'view-result', component: ViewResultsComponent },
   { path: '', pathMatch: 'full', redirectTo: '/login' }
 ];
