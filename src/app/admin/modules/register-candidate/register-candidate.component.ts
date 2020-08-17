@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { AdminService } from '../../shared/services/admin.service';
+import { TimeOut } from 'src/app/shared/timeouts';
 
 @Component({
   selector: 'app-register-candidate',
@@ -55,6 +56,8 @@ export class RegisterCandidateComponent implements OnInit {
     return this.isLoading;
   }
 
+  timeOut = new TimeOut();
+
   registerCandidate = this.formBuilder.group({
     firstname: ['', [Validators.required, Validators.nullValidator]],
     lastname: ['', [Validators.required, Validators.nullValidator]],
@@ -73,6 +76,7 @@ export class RegisterCandidateComponent implements OnInit {
             this.isLoading = false;
             this.hasError = true;
             this.hasErrorMessage = success.message;
+            this.timeOut.displayErrorTimeout()
           }
         },
         error => console.log('Error', error)
@@ -90,6 +94,7 @@ export class RegisterCandidateComponent implements OnInit {
             this.isLoading = false;
             this.hasError = true;
             this.hasErrorMessage = success.message;
+            this.timeOut.displayErrorTimeout
           }
         },
         error => console.log('Error', error)
@@ -107,10 +112,12 @@ export class RegisterCandidateComponent implements OnInit {
             this.hasSuccess = true;
             this.hasSuccessMessage = success.message;
             this.registerCandidate.reset();
+            this.timeOut.displaySuccessTimeout()
           } else {
             this.isLoading = false;
             this.hasError = true;
             this.hasErrorMessage = success.message;
+            this.timeOut.displayErrorTimeout()
           }
         },
         error => console.log('Error', error)

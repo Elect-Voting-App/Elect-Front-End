@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AdminService } from '../../shared/services/admin.service';
+import { TimeOut } from 'src/app/shared/timeouts';
 
 @Component({
   selector: 'app-view-all-candidates',
@@ -38,6 +39,8 @@ export class ViewAllCandidatesComponent implements OnInit {
     return this.isLoading;
   }
 
+  timeOut = new TimeOut();
+
   //Get All candidates method
   getCandidates() {
     this.adminService.getAllCandidates().subscribe(
@@ -45,10 +48,12 @@ export class ViewAllCandidatesComponent implements OnInit {
         if (success.status) {
           this.isLoading = false;
           this.Candidates = success.data;
+          this.timeOut.displaySuccessTimeout()
         } else {
           this.isLoading = false;
           this.hasError = true;
           this.hasErrorMessage = success.message
+          this.timeOut.displayErrorTimeout()
         }
       },
       error => console.log('Error ', error)

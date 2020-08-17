@@ -4,10 +4,7 @@ import { VotingComponent } from './voting.component';
 import { SharedModule } from '../shared/shared.module';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import { MatMenuModule } from '@angular/material/menu';
 import { MatButtonModule } from '@angular/material/button';
-import { MatIconModule } from '@angular/material/icon';
-import { MatToolbarModule } from '@angular/material/toolbar';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { AuthGuard } from 'src/app/admin/shared/guards/auth.guard';
@@ -18,6 +15,7 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { TokenInterceptor } from 'src/app/shared/token.interceptor';
 import { VoteComponent } from '../modules/vote/vote.component';
 import { ViewResultsComponent } from '../modules/view-results/view-results.component';
+import { ChangeVoterOwnPasswordComponent } from '../modules/change-voter-own-password/change-voter-own-password.component';
 
 
 
@@ -25,7 +23,8 @@ import { ViewResultsComponent } from '../modules/view-results/view-results.compo
   declarations: [
     VotingComponent,
     VoteComponent,
-    ViewResultsComponent
+    ViewResultsComponent,
+    ChangeVoterOwnPasswordComponent
   ],
   imports: [
     CommonModule,

@@ -20,6 +20,10 @@ export class VotingHeaderComponent implements OnInit {
     this.toggleSideBarForMe.emit();
   }
 
+  onPassChange() {
+    this.router.navigate(['voting/change-voter-password']);
+  }
+
   onSubmit() {
     this.authService.voterLogout()
     .subscribe(

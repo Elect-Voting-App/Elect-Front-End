@@ -24,6 +24,7 @@ import { ViewResultsComponent } from './voter/modules/view-results/view-results.
 import { ChangeInitialPassComponent } from './admin/change-initial-pass/change-initial-pass.component';
 import { AdminPasswordGuard } from './admin/shared/guards/admin-password.guard';
 import { ChangeAdminOwnPasswordComponent } from './admin/modules/change-admin-own-password/change-admin-own-password.component';
+import { ChangeVoterOwnPasswordComponent } from './voter/modules/change-voter-own-password/change-voter-own-password.component';
 
 //All Routes in the Application
 const routes: Routes = [
@@ -50,7 +51,8 @@ const routes: Routes = [
   {
     path: 'voting', component: VotingComponent, canActivate: [PasswordGuard], canLoad: [PasswordGuard],
     children: [
-      { path: '', component: VoteComponent }
+      { path: '', component: VoteComponent },
+      { path: 'change-voter-password', component: ChangeVoterOwnPasswordComponent }
     ]
   },
   { path: 'voter-change-password', component: VoterChangePasswordComponent },

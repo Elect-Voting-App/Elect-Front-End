@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AdminService } from '../../shared/services/admin.service';
+import { TimeOut } from 'src/app/shared/timeouts';
 
 @Component({
   selector: 'app-remove-admin',
@@ -36,6 +37,8 @@ export class RemoveAdminComponent implements OnInit {
     return this.isLoading;
   }
 
+  timeOut = new TimeOut();
+
   //getting All Admins
   allAdmins() {
     this.adminService.getAllAdmins().subscribe(
@@ -43,10 +46,12 @@ export class RemoveAdminComponent implements OnInit {
         if (success.status) {
           this.isLoading = false;
           this.Admins = success.data;
+          this.timeOut.displaySuccessTimeout()
         } else {
           this.isLoading = false;
           this.hasError = true;
           this.hasErrorMessage = success.message
+          this.timeOut.displayErrorTimeout()
         }
       },
       error => console.error('Error', error)
@@ -63,11 +68,13 @@ export class RemoveAdminComponent implements OnInit {
             this.isLoading = false;
             this.hasSuccess = true;
             this.hasSuccessMessage = success.message;
+            this.timeOut.displaySuccessTimeout()
             this.allAdmins();
           } else {
             this.isLoading = false;
             this.hasError = true;
             this.hasErrorMessage = success.message
+            this.timeOut.displayErrorTimeout()
           }
         },
         error => console.error('Error', error)

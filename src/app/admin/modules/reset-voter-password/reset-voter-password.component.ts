@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { AdminService } from '../../shared/services/admin.service';
 import { PasswordGenerator } from 'src/app/shared/password-generator';
+import { TimeOut } from 'src/app/shared/timeouts';
 
 @Component({
   selector: 'app-reset-voter-password',
@@ -31,6 +32,7 @@ export class ResetVoterPasswordComponent implements OnInit {
   hasErrorMessage: string;
   hasSuccessMessage: string;
   Voters: any;
+  timeOut = new TimeOut();
 
   searchError() {
     return this.hasError;
@@ -60,10 +62,12 @@ export class ResetVoterPasswordComponent implements OnInit {
             this.isLoading = false;
             this.Voters = success.data;
             this.resetForm.reset();
+            this.timeOut.displaySuccessTimeout()
           } else {
             this.isLoading = false;
             this.hasError = false;
             this.hasErrorMessage = success.message;
+            this.timeOut.displayErrorTimeout()
           }
         },
         error => console.error('Error', error)
@@ -89,10 +93,12 @@ export class ResetVoterPasswordComponent implements OnInit {
                     this.isLoading = false;
                     this.hasSuccess = true;
                     this.hasSuccessMessage = success.message;
+                    this.timeOut.displaySuccessTimeout()
                   } else {
                     this.isLoading = false;
                     this.hasError = true;
                     this.hasErrorMessage = success.message;
+                    this.timeOut.displayErrorTimeout()
                   }
                 },
                 error => console.log('Error', error)
@@ -101,6 +107,7 @@ export class ResetVoterPasswordComponent implements OnInit {
             this.isLoading = false;
             this.hasError = true;
             this.hasErrorMessage = success.message;
+            this.timeOut.displayErrorTimeout()
           }
         },
         error => console.log('Error', error)

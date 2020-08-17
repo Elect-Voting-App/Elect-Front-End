@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { PasswordGenerator } from '../../../shared/password-generator';
 import { AdminService } from '../../shared/services/admin.service';
+import { TimeOut } from 'src/app/shared/timeouts';
 
 @Component({
   selector: 'app-register-admin',
@@ -59,6 +60,8 @@ export class RegisterAdminComponent implements OnInit {
   hasErrorMessage: string;
   hasSuccessMessage: string;
 
+  timeOut = new TimeOut();
+
   registerError() {
     return this.hasError;
   }
@@ -87,11 +90,13 @@ export class RegisterAdminComponent implements OnInit {
                     this.registerAdmin.reset();
                     let newPass = this.generator.generate();
                     this.password.setValue(newPass);
+                    this.timeOut.displaySuccessTimeout()
                     console.log(newPass);
                   } else {
                     this.isLoading = false;
                     this.hasError = true;
                     this.hasErrorMessage = success.message;
+                    this.timeOut.displayErrorTimeout()
                   }
                 },
                 error => console.error('Error', error)
@@ -100,6 +105,7 @@ export class RegisterAdminComponent implements OnInit {
             this.isLoading = false;
             this.hasError = true;
             this.hasErrorMessage = success.message;
+            this.timeOut.displayErrorTimeout()
           }
         },
         error => console.error('Error', error)

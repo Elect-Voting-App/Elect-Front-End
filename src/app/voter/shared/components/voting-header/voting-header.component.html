@@ -13,9 +13,9 @@
             <mat-icon>person_outline</mat-icon>
           </button>
           <mat-menu #menu="matMenu">
-            <button mat-menu-item>
+            <button mat-menu-item (click)="onPassChange()">
               <mat-icon>settings</mat-icon>
-              Settings
+              Change Password
             </button>
             <button mat-menu-item (click)="onSubmit()">
               <mat-icon>exit_to_app</mat-icon>

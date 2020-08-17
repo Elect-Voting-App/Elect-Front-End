@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AdminService } from '../../shared/services/admin.service';
+import { TimeOut } from 'src/app/shared/timeouts';
 
 @Component({
   selector: 'app-view-all-voters',
@@ -23,6 +24,8 @@ export class ViewAllVotersComponent implements OnInit {
   isLoading = false;
   hasErrorMessage: string;
   hasSuccessMessage: string;
+  timeOut = new TimeOut();
+
 
   //Load success
   loadingSuccess() {
@@ -46,10 +49,12 @@ export class ViewAllVotersComponent implements OnInit {
         if (success.status) {
           this.isLoading = false;
           this.Voters = success.data;
+          this.timeOut.displaySuccessTimeout()
         } else {
           this.isLoading = false;
           this.hasError = true;
           this.hasErrorMessage = success.message
+          this.timeOut.displayErrorTimeout()
         }
       },
       error => console.log('Error ', error)

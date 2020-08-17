@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { AdminService } from '../../shared/services/admin.service';
 import { PasswordGenerator } from 'src/app/shared/password-generator';
+import { TimeOut } from 'src/app/shared/timeouts';
 
 @Component({
   selector: 'app-remove-voter',
@@ -49,6 +50,8 @@ export class RemoveVoterComponent implements OnInit {
     return this.hasSuccess;
   }
 
+  timeOut = new TimeOut();
+
   //On Search 
   onSearch() {
     this.isLoading = true;
@@ -61,10 +64,12 @@ export class RemoveVoterComponent implements OnInit {
             this.isLoading = false;
             this.Voters = success.data;
             this.resetForm.reset();
+            this.timeOut.displaySuccessTimeout
           } else {
             this.isLoading = false;
             this.hasError = true;
             this.hasErrorMessage = success.message;
+            this.timeOut.displayErrorTimeout()
           }
         },
         error => console.error('Error', error)
@@ -81,10 +86,12 @@ export class RemoveVoterComponent implements OnInit {
             this.isLoading = false;
             this.hasSuccess = true;
             this.hasSuccessMessage = success.message;
+            this.timeOut.displaySuccessTimeout()
           } else {
             this.isLoading = false;
             this.hasError = true;
             this.hasErrorMessage = success.message;
+            this.timeOut.displayErrorTimeout
           }
         },
         error => console.log('Error ', error)

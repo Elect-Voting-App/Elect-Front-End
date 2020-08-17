@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { AdminService } from '../../shared/services/admin.service';
+import { TimeOut } from 'src/app/shared/timeouts';
 
 @Component({
   selector: 'app-remove-candidate',
@@ -52,6 +53,8 @@ export class RemoveCandidateComponent implements OnInit {
     return this.hasSuccess;
   }
 
+  timeOut = new TimeOut();
+
   //On Search
   onSearch() {
     this.isLoading = true;
@@ -64,10 +67,12 @@ export class RemoveCandidateComponent implements OnInit {
             this.hasSuccessMessage = 'Match Found';
             this.Candidates = success.data;
             this.deleteForm.reset();
+            this.timeOut.displaySuccessTimeout()
           } else {
             this.isLoading = false;
             this.hasError = true;
             this.hasErrorMessage = success.message;
+            this.timeOut.displayErrorTimeout()
           }
         },
         error => console.log('Error', error)
@@ -84,10 +89,12 @@ export class RemoveCandidateComponent implements OnInit {
             this.isLoading = false;
             this.hasSuccess = true;
             this.hasSuccessMessage = success.message;
+            this.timeOut.displaySuccessTimeout()
           } else {
             this.isLoading = false;
             this.hasError = true;
             this.hasErrorMessage = success.message;
+            this.timeOut.displayErrorTimeout()
           }
         },
         error => console.log('Error', error)
