@@ -8,7 +8,7 @@ export class TimeOut {
   }
   displaySuccessTimeout() {
     setTimeout(() => {
-      $('.alert-danger').slideUp("slow");
+      $('.alert-success').slideUp("slow");
     }, 5000);
   }
 }

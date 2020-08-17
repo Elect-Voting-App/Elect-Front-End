@@ -16,9 +16,8 @@
       <p class="alert alert-success text-center"> {{hasSuccessMessage}} </p>
     </div>
     <div class="form-label-group">
-      <input type="email" name="email" class="form-control" id="inputEmail" placeholder="Email Address"
-        formControlName="email" required [class.is-invalid]="email.invalid && email.touched">
-      <label for="inputEmail">Email address</label>
+      <input type="email" name="email" class="form-control" placeholder="Email Address" formControlName="email" required
+        [class.is-invalid]="email.invalid && email.touched">
       <div *ngIf="email.invalid && email.touched">
         <small *ngIf="email.errors?.required" class="text-danger"> Email Address is required</small>
         <small *ngIf="email.errors?.email" class="text-danger"> Enter a valid Email Address</small>

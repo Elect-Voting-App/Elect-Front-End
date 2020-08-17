@@ -15,32 +15,32 @@
     <p class="alert alert-success text-center"> {{hasSuccessMessage}} </p>
   </div>
   <div class="form-label-group">
-    <input type="text" name="firstname" class="form-control" id="inputFirstname" placeholder="Firstname" formControlName="firstname" required [class.is-invalid]="firstname.invalid && firstname.touched">
-    <label for="inputFirstname">Firstname</label>
+    <input type="text" name="firstname" class="form-control" placeholder="Firstname" formControlName="firstname"
+      required [class.is-invalid]="firstname.invalid && firstname.touched">
     <div *ngIf="firstname.invalid && firstname.touched">
       <small *ngIf="firstname.errors?.required" class="text-danger"> Firstname is required</small>
       <small *ngIf="firstname.errors?.minlength" class="text-danger"> Firstname must be at least 3 characters</small>
     </div>
   </div>
   <div class="form-label-group">
-    <input type="text" name="lastname" class="form-control" id="inputLastname" placeholder="Lastname" formControlName="lastname" required [class.is-invalid]="lastname.invalid && lastname.touched">
-    <label for="inputLastname">Lastname</label>
+    <input type="text" name="lastname" class="form-control" placeholder="Lastname" formControlName="lastname" required
+      [class.is-invalid]="lastname.invalid && lastname.touched">
     <div *ngIf="lastname.invalid && lastname.touched">
       <small *ngIf="lastname.errors?.required" class="text-danger"> Lastname is required</small>
       <small *ngIf="lastname.errors?.minlength" class="text-danger"> Lastname must be at least 3 characters</small>
     </div>
   </div>
   <div class="form-label-group">
-    <input type="email" name="email" class="form-control" id="inputEmail" placeholder="Email Address" formControlName="email" required [class.is-invalid]="email.invalid && email.touched">
-    <label for="inputEmail">Email address</label>
+    <input type="email" name="email" class="form-control" placeholder="Email Address" formControlName="email" required
+      [class.is-invalid]="email.invalid && email.touched">
     <div *ngIf="email.invalid && email.touched">
       <small *ngIf="email.errors?.required" class="text-danger"> Email Address is required</small>
       <small *ngIf="email.errors?.email" class="text-danger"> Enter a valid Email Address</small>
     </div>
   </div>
   <div class="form-label-group">
-    <input type="password" name="password" id="inputPassword" class="form-control" placeholder="Password" readonly formControlName="password" required [class.is-invalid]="password.invalid && password.touched">
-    <label for="inputPassword">Password</label>
+    <input type="password" name="password" class="form-control" placeholder="Password" readonly
+      formControlName="password" required [class.is-invalid]="password.invalid && password.touched">
     <div *ngIf="password.invalid && password.touched">
       <small *ngIf="password.errors?.required" class="text-danger"> Password is required</small>
       <small *ngIf="password.errors?.minlength" class="text-danger"> Password must be at least 6 characters</small>
@@ -49,14 +49,15 @@
   <div class="form-label-group">
     <select required class="form-control" name="role" formControlName="role">
       <option value="" disabled> Select a Role for Admin</option>
-      <option value="admin" >Administator</option>
-      <option value="ec" >Electorial Commision</option>
+      <option value="admin">Administator</option>
+      <option value="ec">Electorial Commision</option>
     </select>
     <div *ngIf="role.invalid && role.touched">
       <small *ngIf="role.errors?.required" class="text-danger"> Admin Role is required</small>
     </div>
   </div>
   <div class="col-md-12 text-center">
-    <button [disabled]="!registerAdmin.valid" type="submit" class="btn btn-block mybtn btn-primary text-uppercase">Register</button>
+    <button [disabled]="!registerAdmin.valid" type="submit"
+      class="btn btn-block mybtn btn-primary text-uppercase">Register</button>
   </div>
 </form>
