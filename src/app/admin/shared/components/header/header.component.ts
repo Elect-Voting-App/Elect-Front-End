@@ -21,6 +21,10 @@ export class HeaderComponent implements OnInit {
     this.toggleSideBarForMe.emit();
   }
 
+  onPassChange() {
+    this.router.navigate(['admin/change-admin-password']);
+  }
+
   onSubmit() {
     this.authService.logout()
       .subscribe(
