@@ -1,15 +1,11 @@
-h4 {
+.info-head {
+  font-size: 1.9rem;
   margin-top: 0;
   margin-bottom: 5px;
 }
 
 .total {
-  font-size: 3rem;
-}
-
-.mat-icon,
-.description {
-  color: green;
+  margin-top: 5px;
   font-size: 1rem;
 }
 

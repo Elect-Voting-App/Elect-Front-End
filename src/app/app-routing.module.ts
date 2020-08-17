@@ -23,12 +23,13 @@ import { VoteComponent } from './voter/modules/vote/vote.component';
 import { ViewResultsComponent } from './voter/modules/view-results/view-results.component';
 import { ChangeInitialPassComponent } from './admin/change-initial-pass/change-initial-pass.component';
 import { AdminPasswordGuard } from './admin/shared/guards/admin-password.guard';
+import { ChangeAdminOwnPasswordComponent } from './admin/modules/change-admin-own-password/change-admin-own-password.component';
 
 //All Routes in the Application
 const routes: Routes = [
   { path: 'admin/login', component: LoginComponent, canActivate: [AuthGuard] },
   {
-    path: 'admin', component: DefaultComponent, canActivate: [ AdminPasswordGuard], canLoad: [AdminPasswordGuard],
+    path: 'admin', component: DefaultComponent, canActivate: [AdminPasswordGuard], canLoad: [AdminPasswordGuard],
     children: [
       { path: '', component: DashboardComponent, canActivate: [DashboardGuard], canLoad: [DashboardGuard] },
       { path: 'register-admin', component: RegisterAdminComponent },
@@ -40,13 +41,14 @@ const routes: Routes = [
       { path: 'reset-voter-password', component: ResetVoterPasswordComponent },
       { path: 'view-all-candidates', component: ViewAllCandidatesComponent },
       { path: 'register-candidate', component: RegisterCandidateComponent },
-      { path: 'remove-candidate', component: RemoveCandidateComponent }
+      { path: 'remove-candidate', component: RemoveCandidateComponent },
+      { path: 'change-admin-password', component: ChangeAdminOwnPasswordComponent }
     ]
   },
-  {path: 'change-initial-password', component: ChangeInitialPassComponent},
+  { path: 'change-initial-password', component: ChangeInitialPassComponent },
   { path: 'login', component: VoterLoginComponent },
   {
-    path: 'voting', component: VotingComponent, canActivate: [PasswordGuard],
+    path: 'voting', component: VotingComponent, canActivate: [PasswordGuard], canLoad: [PasswordGuard],
     children: [
       { path: '', component: VoteComponent }
     ]
@@ -62,4 +64,4 @@ const routes: Routes = [
 })
 
 export class AppRoutingModule { }
-export const routingComponents = [LoginComponent, ChangeInitialPassComponent , VoterLoginComponent, VoterChangePasswordComponent]
+export const routingComponents = [LoginComponent, ChangeInitialPassComponent, VoterLoginComponent, VoterChangePasswordComponent]

@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { DashboardService } from '../../shared/services/dashboard.service';
+import { AdminService } from '../../shared/services/admin.service';
 // import { MatTableDataSource, MatPaginator } from '@angular/material';
 
 export interface PeriodicElement {
@@ -39,22 +40,46 @@ const ELEMENT_DATA: PeriodicElement[] = [
 export class DashboardComponent implements OnInit {
 
   bigChart = [];
-  cards = [];
+  total_ec: number;
+  total_sysadmin: number;
+  total_candidates: number;
+  total_voters: number;
   pieChart = [];
+  lists = []
 
   displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
   // dataSource = new MatTableDataSource<PeriodicElement>(ELEMENT_DATA);
 
   // @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
 
-  constructor(private dashboardService: DashboardService) { }
+  constructor(private dashboardService: DashboardService, private adminService: AdminService) { }
 
   ngOnInit() {
     this.bigChart = this.dashboardService.bigChart();
-    this.cards = this.dashboardService.cards();
+    this.getInfo()
     this.pieChart = this.dashboardService.pieChart();
 
     // this.dataSource.paginator = this.paginator;
+  }
+
+  getInfo() {
+    this.adminService.getCardsInfo()
+    .subscribe(
+      success => {
+        if (success.status) {
+          for (let i = 0; i <= 3; i++) {
+            this.lists.push(success.data[i][0]);
+          }
+          this.total_ec = this.lists[0].ec;
+          this.total_sysadmin = this.lists[1].systemadmin;
+          this.total_candidates = this.lists[2].candidate;
+          this.total_voters = this.lists[3].voter;
+        } else {
+          console.log('Failed', success.message)
+        }
+      }, 
+      error => console.error('Error', error)
+      );
   }
 
 }

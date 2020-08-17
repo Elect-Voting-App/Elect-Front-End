@@ -26,6 +26,8 @@ import { ResetVoterPasswordComponent } from '../../modules/reset-voter-password/
 import { ViewAllCandidatesComponent } from '../../modules/view-all-candidates/view-all-candidates.component';
 import { RemoveCandidateComponent } from '../../modules/remove-candidate/remove-candidate.component';
 import { RegisterCandidateComponent } from '../../modules/register-candidate/register-candidate.component';
+import { MatDividerModule } from '@angular/material/divider';
+import { ChangeAdminOwnPasswordComponent } from '../../modules/change-admin-own-password/change-admin-own-password.component';
 
 
 
@@ -42,13 +44,15 @@ import { RegisterCandidateComponent } from '../../modules/register-candidate/reg
     ResetVoterPasswordComponent,
     ViewAllCandidatesComponent,
     RegisterCandidateComponent,
-    RemoveCandidateComponent
+    RemoveCandidateComponent,
+    ChangeAdminOwnPasswordComponent
   ],
   imports: [
     CommonModule,
     RouterModule,
     SharedModule,
     MatSidenavModule,
+    MatDividerModule,
     MatButtonModule,
     ReactiveFormsModule,
     FlexLayoutModule,

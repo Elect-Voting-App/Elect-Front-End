@@ -113,4 +113,8 @@ export class AdminService {
     return this.http.post<any>(`${config.adminApiUrl}/password-change`, adminData);
   }
 
+  getCardsInfo() {
+    return this.http.post<any>(`${config.adminApiUrl}/get-info`,null);
+  }
+
 }

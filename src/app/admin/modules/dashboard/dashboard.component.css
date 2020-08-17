@@ -1,9 +1,35 @@
-.stats-cards {
-    .mat-card {
-      overflow: hidden;
-    }
-  }
-  
-  table {
-    width: 100%;
-  }
+.stats-cards .mat-card {
+  overflow: hidden;
+}
+
+.top-dashboard {
+  font-size: 2rem;
+}
+
+.aux-dash {
+  background-color: #f1eded;
+}
+
+.aux-dash span {
+  color: #827f7f;
+}
+
+.widget-green {
+  color: #ffffff;
+  background-color: #2e9a03;
+}
+
+.widget-blue {
+  color: #ffffff;
+  background-color: #016ec5;
+}
+
+.widget-yellow {
+  color: #ffffff;
+  background-color: #c39814;
+}
+
+.widget-red {
+  color: #ffffff;
+  background-color: #ad0101;
+}
