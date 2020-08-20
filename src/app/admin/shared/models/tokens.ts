@@ -6,5 +6,5 @@ export class Tokens {
   role: string;
   studentID: string;
   hall: string;
-  initialLogin: boolean;
+  initialLogin: string;
 }

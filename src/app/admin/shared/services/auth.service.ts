@@ -15,6 +15,7 @@ export class AuthService {
   private readonly REFRESH_TOKEN = 'REFRESH_TOKEN';
   private readonly USER = 'USER';
 
+
   constructor(private _http: HttpClient) { }
 
   //Login http post request to the server
@@ -55,6 +56,16 @@ export class AuthService {
 
   isLoggedIn() {
     return !!this.getJwtToken();
+  }
+
+  getInitialLogin() {
+    let initial = JSON.parse(localStorage.getItem("USER"));
+    return this._http.post<any>(`${config.adminApiUrl}/initial`,{email: initial.email});
+  }
+  
+  getVoterInitialLogin() {
+    let initial = JSON.parse(localStorage.getItem("USER"));
+    return this._http.post<any>(`${config.voterApiUrl}/initial`,{studentID: initial.studentID});
   }
 
   getJwtToken() {
@@ -102,8 +113,7 @@ export class AuthService {
     let user = {
       name: tokens.name,
       email: tokens.email,
-      role: tokens.role,
-      initialLogin: tokens.initialLogin
+      role: tokens.role
     }
     localStorage.setItem(this.USER, JSON.stringify(user));
   }
@@ -112,8 +122,7 @@ export class AuthService {
     let voter = {
       name: tokens.name,
       studentID: tokens.studentID,
-      hall: tokens.hall,
-      initialLogin: tokens.initialLogin
+      hall: tokens.hall
     }
     localStorage.setItem(this.USER, JSON.stringify(voter));
   }

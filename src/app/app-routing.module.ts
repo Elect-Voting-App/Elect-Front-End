@@ -18,19 +18,19 @@ import { RemoveCandidateComponent } from './admin/modules/remove-candidate/remov
 import { VoterLoginComponent } from './voter/voter-login/voter-login.component';
 import { VotingComponent } from './voter/voting/voting.component';
 import { VoterChangePasswordComponent } from './voter/voter-change-password/voter-change-password.component';
-import { PasswordGuard } from './voter/shared/guards/password.guard';
 import { VoteComponent } from './voter/modules/vote/vote.component';
 import { ViewResultsComponent } from './voter/modules/view-results/view-results.component';
 import { ChangeInitialPassComponent } from './admin/change-initial-pass/change-initial-pass.component';
-import { AdminPasswordGuard } from './admin/shared/guards/admin-password.guard';
 import { ChangeAdminOwnPasswordComponent } from './admin/modules/change-admin-own-password/change-admin-own-password.component';
 import { ChangeVoterOwnPasswordComponent } from './voter/modules/change-voter-own-password/change-voter-own-password.component';
+import { VotingPasswordGuard } from './voter/shared/guards/voting-password.guard';
+import { VoterAuthGuard } from './voter/shared/guards/voter-auth.guard';
 
 //All Routes in the Application
 const routes: Routes = [
   { path: 'admin/login', component: LoginComponent, canActivate: [AuthGuard] },
   {
-    path: 'admin', component: DefaultComponent, canActivate: [AdminPasswordGuard], canLoad: [AdminPasswordGuard],
+    path: 'admin', component: DefaultComponent,
     children: [
       { path: '', component: DashboardComponent, canActivate: [DashboardGuard], canLoad: [DashboardGuard] },
       { path: 'register-admin', component: RegisterAdminComponent },
@@ -47,11 +47,11 @@ const routes: Routes = [
     ]
   },
   { path: 'change-initial-password', component: ChangeInitialPassComponent },
-  { path: 'login', component: VoterLoginComponent },
+  { path: 'login', component: VoterLoginComponent, canActivate: [VoterAuthGuard] },
   {
-    path: 'voting', component: VotingComponent, canActivate: [PasswordGuard], canLoad: [PasswordGuard],
+    path: 'voting', component: VotingComponent,
     children: [
-      { path: '', component: VoteComponent },
+      { path: '', component: VoteComponent, canActivate: [VotingPasswordGuard], canLoad: [VotingPasswordGuard] },
       { path: 'change-voter-password', component: ChangeVoterOwnPasswordComponent }
     ]
   },

@@ -12,8 +12,8 @@
               </div>
               <div class="col ml-2">
                 <div class="candidate-name">{{candidate.candidate_name}}</div>
-                <div>
-                  <button type="submit" class="btn btn-block mybtn btn-primary text-uppercase">Vote</button>
+                <div class="btn text-uppercase">
+                  <button type="submit"  (click)="castVote(category.category_name,position.position_name,candidate.candidate_voteID)" [ngClass]="(can_vote.includes(candidate.candidate_voteID))? 'btn-vote':'btn-outline-dark btn-not-vote'">Vote</button>
                 </div>
               </div>
             </div>
@@ -21,5 +21,8 @@
         </div>
       </div>
     </div>
+  </div>
+  <div *ngIf="canSubmit()">
+    <button type="submit" class="btn-vote" (click)="onSubmit()">Submit</button>
   </div>
 </div>

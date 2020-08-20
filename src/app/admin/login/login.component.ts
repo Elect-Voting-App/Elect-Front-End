@@ -54,6 +54,7 @@ export class LoginComponent implements OnInit {
             this.hasError = true;
             this.hasErrorMessage = success.message
             this.timeOut.displayErrorTimeout();
+            this.loginForm.reset()
           }
         },
         error => console.error('Error', error)

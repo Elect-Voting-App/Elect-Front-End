@@ -56,6 +56,7 @@ export class VoterLoginComponent implements OnInit {
           this.hasError = true;
           this.hasErrorMessage = success.message
           this.timeOut.displayErrorTimeout()
+          this.voterLoginForm.reset()
         }
       },
       error => console.error('Error', error)

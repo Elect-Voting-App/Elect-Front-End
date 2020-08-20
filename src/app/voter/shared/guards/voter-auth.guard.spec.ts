@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { AdminPasswordGuard } from './admin-password.guard';
+import { VoterAuthGuard } from './voter-auth.guard';
 
-describe('AdminPasswordGuard', () => {
-  let guard: AdminPasswordGuard;
+describe('VoterAuthGuard', () => {
+  let guard: VoterAuthGuard;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    guard = TestBed.inject(AdminPasswordGuard);
+    guard = TestBed.inject(VoterAuthGuard);
   });
 
   it('should be created', () => {

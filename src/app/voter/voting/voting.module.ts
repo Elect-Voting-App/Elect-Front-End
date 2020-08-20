@@ -16,6 +16,7 @@ import { TokenInterceptor } from 'src/app/shared/token.interceptor';
 import { VoteComponent } from '../modules/vote/vote.component';
 import { ViewResultsComponent } from '../modules/view-results/view-results.component';
 import { ChangeVoterOwnPasswordComponent } from '../modules/change-voter-own-password/change-voter-own-password.component';
+import { VotingPasswordGuard } from '../shared/guards/voting-password.guard';
 
 
 
@@ -40,6 +41,7 @@ import { ChangeVoterOwnPasswordComponent } from '../modules/change-voter-own-pas
     AdminService,
     AuthService,
     VoterService,
+    VotingPasswordGuard,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: TokenInterceptor,

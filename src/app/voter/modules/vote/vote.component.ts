@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { VoterService } from '../../shared/services/voter.service';
+import { AuthService } from 'src/app/admin/shared/services/auth.service';
+import { Router } from '@angular/router';
+import { TimeOut } from 'src/app/shared/timeouts';
 
 @Component({
   selector: 'app-vote',
@@ -9,14 +12,30 @@ import { VoterService } from '../../shared/services/voter.service';
 
 export class VoteComponent implements OnInit {
 
-  constructor(private voterService: VoterService) { }
+  constructor(private voterService: VoterService, private authService: AuthService, private router: Router) { }
 
   ngOnInit(): void {
-    this.getCandidate();
+    this.authService.getVoterInitialLogin()
+      .subscribe(
+        success => {
+          if (success.status) {
+            if (success.data.change_password == 1) {
+              this.router.navigate(['voter-change-password']);
+            }
+          } else {
+            this.getCandidate();
+          }
+        },
+        error => console.log('Error', error)
+      );
   }
 
   candidates: any[] = []
   groupedData: any[] = []
+  votes = []
+  hasClicked: boolean;
+  timeout = new TimeOut();
+
 
   getCandidate() {
     this.voterService.getCandidates()
@@ -106,5 +125,34 @@ export class VoteComponent implements OnInit {
       }
 
     });
+  }
+
+  all_votes = []
+
+  castVote(category, position, candidate) {
+
+    if (this.all_votes.length !== 0) {
+      this.all_votes = this.all_votes.filter(v => ((v.category === category && v.position !== position) || (v.category !== category && v.position === position) || (v.category !== category && v.position !== position)))
+    }
+    this.all_votes.push({
+      category: category,
+      position: position,
+      candidate: candidate
+    });
+    this.can_vote = []
+    this.all_votes.forEach(element => {
+      this.can_vote.push(element.candidate)
+    });
+
+  }
+
+  can_vote = [];
+
+  onSubmit() {
+    console.log(this.all_votes)
+  }
+
+  canSubmit() {
+    return (this.all_votes.length !== 0) ? true : false;
   }
 }

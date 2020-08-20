@@ -12,6 +12,7 @@ sideBarOpen = false;
   constructor() { }
 
   ngOnInit(): void {
+    
   }
 
   sideBarToggler() {

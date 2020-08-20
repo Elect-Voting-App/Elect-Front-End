@@ -11,4 +11,9 @@ export class TimeOut {
       $('.alert-success').slideUp("slow");
     }, 5000);
   }
+  
+  selected(id) {
+    console.log(id)
+    $(`#${id}`).addclass('mybtn');
+  }
 }

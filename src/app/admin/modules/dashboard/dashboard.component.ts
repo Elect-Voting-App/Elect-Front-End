@@ -1,6 +1,8 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { DashboardService } from '../../shared/services/dashboard.service';
 import { AdminService } from '../../shared/services/admin.service';
+import { AuthService } from '../../shared/services/auth.service';
+import { Router } from '@angular/router';
 // import { MatTableDataSource, MatPaginator } from '@angular/material';
 
 export interface PeriodicElement {
@@ -52,11 +54,24 @@ export class DashboardComponent implements OnInit {
 
   // @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
 
-  constructor(private dashboardService: DashboardService, private adminService: AdminService) { }
+  constructor(private dashboardService: DashboardService, private authService: AuthService, private adminService: AdminService, private router: Router) { }
 
   ngOnInit() {
+    this.authService.getInitialLogin()
+      .subscribe(
+        success => {
+          console.log(success.data.change_password)
+          if (success.status) {
+            if (success.data.change_password == 1) {
+              this.router.navigate(['change-initial-password']);
+            } else {
+               this.getInfo()
+            }
+          } 
+        },
+        error => console.log('Error', error)
+      );
     this.bigChart = this.dashboardService.bigChart();
-    this.getInfo()
     this.pieChart = this.dashboardService.pieChart();
 
     // this.dataSource.paginator = this.paginator;
