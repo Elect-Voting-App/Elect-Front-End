@@ -15,6 +15,7 @@ export class VoteComponent implements OnInit {
   constructor(private voterService: VoterService, private authService: AuthService, private router: Router) { }
 
   ngOnInit(): void {
+    this.isLoading = true;
     this.authService.getVoterInitialLogin()
       .subscribe(
         success => {
@@ -24,6 +25,7 @@ export class VoteComponent implements OnInit {
             }
           } else {
             this.getCandidate();
+            this.isLoading = false;
           }
         },
         error => console.log('Error', error)
@@ -33,8 +35,13 @@ export class VoteComponent implements OnInit {
   candidates: any[] = []
   groupedData: any[] = []
   votes = []
-  hasClicked: boolean;
+  hasClicked = false;
   timeout = new TimeOut();
+  hasError = false;
+  hasErrorMessage: string;
+  hasSuccess = false;
+  hasSuccessMessage: string;
+  isLoading = false;
 
 
   getCandidate() {
@@ -143,16 +150,33 @@ export class VoteComponent implements OnInit {
     this.all_votes.forEach(element => {
       this.can_vote.push(element.candidate)
     });
-
+    
+    this.hasClicked = (this.all_votes.length !== 0) ? true : false;
   }
 
   can_vote = [];
 
   onSubmit() {
-    console.log(this.all_votes)
+    this.isLoading =true;
+    this.hasClicked = false;
+    //Send data to server
+    this.voterService.submitVotes(this.can_vote)
+    .subscribe(
+      success => {
+        if (success.status) {
+          //Success
+        } else {
+          this.isLoading = false;
+          this.hasError = true;
+          this.hasErrorMessage = success.message
+          this.timeout.displayErrorTimeout();
+        }
+      },
+      error => console.error('Error', error)
+    );
   }
 
   canSubmit() {
-    return (this.all_votes.length !== 0) ? true : false;
+    return this.hasClicked
   }
 }

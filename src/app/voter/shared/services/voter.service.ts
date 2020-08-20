@@ -25,4 +25,8 @@ export class VoterService {
   getCandidates() {
     return this.http.post<any>(`${config.voterApiUrl}/candidates`, null);
   }
+
+  submitVotes(votes) {
+    return this.http.post<any>(`${config.voterApiUrl}/vote`, {data: votes});
+  }
 }
