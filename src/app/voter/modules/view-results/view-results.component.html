@@ -1,72 +1,28 @@
-<div class="container-fluid">
-  <div class="border bg-dark m-3 row justify-content-around rounded border-dark p-3 ">
-    <div class="brand"> VOTING RESULTS</div>
-  </div>
-</div>
-<div class="container-fluid">
-  <div class="border m-3 row justify-content-around rounded border-dark p-3 ">
-    <div class="card">
-      <img src="assets/admin/account_avatar.png" class="card-img-top" alt="...">
-      <div class="card-body">
-        <p class="card-text"> SRC President </p>
-        <p class="card-text"> Larry Godwin </p>
-        <p class="card-text"> Votes: 500 </p>
-      </div>
-    </div>
-
-    <div class="card">
-      <img src="assets/admin/account_avatar.png" class="card-img-top" alt="...">
-      <div class="card-body">
-        <p class="card-text"> SRC President </p>
-        <p class="card-text"> Larry Okraku </p>
-        <p class="card-text"> Votes: 700 </p>
-      </div>
-    </div>
-  </div>
-  <div class="border m-3 row justify-content-around rounded border-dark p-3 ">
-    <div class="card">
-      <img src="assets/admin/account_avatar.png" class="card-img-top" alt="...">
-      <div class="card-body">
-        <p class="card-text"> SRC Treasurer </p>
-        <p class="card-text"> Larry Godwin </p>
-        <p class="card-text"> Votes: 40 </p>
-      </div>
-    </div>
-
-    <div class="card">
-      <img src="assets/admin/account_avatar.png" class="card-img-top" alt="...">
-      <div class="card-body">
-        <p class="card-text"> SRC Treasurer </p>
-        <p class="card-text"> Emmanuel Adjei-Sah </p>
-        <p class="card-text"> Votes: 900 </p>
-      </div>
-    </div>
-    <div class="card">
-      <img src="assets/admin/account_avatar.png" class="card-img-top" alt="...">
-      <div class="card-body">
-        <p class="card-text"> SRC Treasurer </p>
-        <p class="card-text"> Maxwell Agra </p>
-        <p class="card-text"> Votes: 900 </p>
+<div class="container">
+  <div class="category shadow mb-4" *ngFor="let category of groupedData;">
+    <div class="category-name"> {{category.category_name}} </div>
+    <div class="position mb-3" *ngFor="let position of category.positions; let j = index;">
+      <div class="position-name"> {{position.position_name}} </div>
+      <div class="container">
+        <div class="row">
+          <div class="candidates shadow-sm col-md" *ngFor="let candidate of position.candidates">
+            <div class="row">
+              <div class="col-4 d-flex align-items-center">
+                <img src="assets/admin/account_avatar.png" class="avatar">
+              </div>
+              <div class="col ml-2">
+                <div class="candidate-name">{{candidate.candidate_name}}</div>
+                <div class="btn text-uppercase">
+                  <button type="submit"  (click)="castVote(category.category_name,position.position_name,candidate.candidate_voteID)" [ngClass]="(can_vote.includes(candidate.candidate_voteID))? 'btn-vote':'btn-outline-dark btn-not-vote'">Vote</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
-  <div class="border m-3 row justify-content-around rounded border-dark p-3 ">
-    <div class="card">
-      <img src="assets/admin/account_avatar.png" class="card-img-top" alt="...">
-      <div class="card-body">
-        <p class="card-text"> Local NUGS President </p>
-        <p class="card-text"> Larry Godwin </p>
-        <p class="card-text"> Votes: 1200 </p>
-      </div>
-    </div>
-
-    <div class="card">
-      <img src="assets/admin/account_avatar.png" class="card-img-top" alt="...">
-      <div class="card-body">
-        <p class="card-text"> Local NUGS President </p>
-        <p class="card-text"> Larry Okraku </p>
-        <p class="card-text"> Votes: 230 </p>
-      </div>
-    </div>
+  <div *ngIf="canSubmit()">
+    <button type="submit" class="btn-vote" (click)="onSubmit()">Submit</button>
   </div>
 </div>
