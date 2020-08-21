@@ -1,4 +1,9 @@
 <div class="container">
+  <div class="border bg-dark mb-3 justify-content-around rounded border-dark">
+    <div class="brand p-3 text-center"> VOTING RESULTS</div>
+  </div>
+</div>
+<div class="container">
   <div class="category shadow mb-4" *ngFor="let category of groupedData;">
     <div class="category-name"> {{category.category_name}} </div>
     <div class="position mb-3" *ngFor="let position of category.positions; let j = index;">
@@ -12,17 +17,12 @@
               </div>
               <div class="col ml-2">
                 <div class="candidate-name">{{candidate.candidate_name}}</div>
-                <div class="btn text-uppercase">
-                  <button type="submit"  (click)="castVote(category.category_name,position.position_name,candidate.candidate_voteID)" [ngClass]="(can_vote.includes(candidate.candidate_voteID))? 'btn-vote':'btn-outline-dark btn-not-vote'">Vote</button>
-                </div>
+                <div class="candidate-name"> {{candidate.candidate_voteID}} </div>
               </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
-  <div *ngIf="canSubmit()">
-    <button type="submit" class="btn-vote" (click)="onSubmit()">Submit</button>
   </div>
 </div>

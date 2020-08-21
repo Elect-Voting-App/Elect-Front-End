@@ -1,4 +1,10 @@
 <div class="container">
+  <div *ngIf="voteError()">
+    <p class="alert alert-danger text-center">{{hasErrorMessage}}</p>
+  </div>
+  <div *ngIf="voteSuccess()">
+    <p class="alert alert-success text-center">{{hasSuccessMessage}}</p>
+  </div>
   <div class="category shadow mb-4" *ngFor="let category of groupedData;">
     <div class="category-name"> {{category.category_name}} </div>
     <div class="position mb-3" *ngFor="let position of category.positions; let j = index;">

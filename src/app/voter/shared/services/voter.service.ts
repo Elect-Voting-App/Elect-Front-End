@@ -29,4 +29,8 @@ export class VoterService {
   submitVotes(votes) {
     return this.http.post<any>(`${config.voterApiUrl}/vote`, {data: votes});
   }
+
+  getResults() {
+    return this.http.post<any>(`${config.voterApiUrl}/results`,null)
+  }
 }

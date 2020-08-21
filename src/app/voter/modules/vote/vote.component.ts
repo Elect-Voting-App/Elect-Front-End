@@ -31,7 +31,8 @@ export class VoteComponent implements OnInit {
         error => console.log('Error', error)
       );
   }
-
+  
+  all_votes = []
   candidates: any[] = []
   groupedData: any[] = []
   votes = []
@@ -43,6 +44,13 @@ export class VoteComponent implements OnInit {
   hasSuccessMessage: string;
   isLoading = false;
 
+  voteError() {
+    return this.hasError;
+  }
+
+  voteSuccess() {
+    return this.hasSuccess;
+  }
 
   getCandidate() {
     this.voterService.getCandidates()
@@ -134,7 +142,6 @@ export class VoteComponent implements OnInit {
     });
   }
 
-  all_votes = []
 
   castVote(category, position, candidate) {
 
@@ -165,6 +172,12 @@ export class VoteComponent implements OnInit {
       success => {
         if (success.status) {
           //Success
+          this.isLoading = false;
+          this.hasSuccess = true;
+          this.hasSuccessMessage = success.message
+          this.all_votes = [];
+          this.can_vote = [];
+          this.timeout.displaySuccessTimeout();
         } else {
           this.isLoading = false;
           this.hasError = true;
