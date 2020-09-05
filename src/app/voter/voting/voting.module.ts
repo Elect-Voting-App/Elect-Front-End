@@ -17,6 +17,7 @@ import { VoteComponent } from '../modules/vote/vote.component';
 import { ViewResultsComponent } from '../modules/view-results/view-results.component';
 import { ChangeVoterOwnPasswordComponent } from '../modules/change-voter-own-password/change-voter-own-password.component';
 import { VotingPasswordGuard } from '../shared/guards/voting-password.guard';
+import { VoterAuthGuard } from '../shared/guards/voter-auth.guard';
 
 
 
@@ -42,6 +43,7 @@ import { VotingPasswordGuard } from '../shared/guards/voting-password.guard';
     AuthService,
     VoterService,
     VotingPasswordGuard,
+    VoterAuthGuard,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: TokenInterceptor,

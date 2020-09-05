@@ -27,7 +27,7 @@ import { VotingModule } from './voter/voting/voting.module';
     NgxCsvParserModule,
     VotingModule
   ],
-  providers: [AuthGuard],
+  providers: [AuthGuard,],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

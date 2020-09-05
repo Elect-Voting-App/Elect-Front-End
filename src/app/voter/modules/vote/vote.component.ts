@@ -22,16 +22,16 @@ export class VoteComponent implements OnInit {
           if (success.status) {
             if (success.data.change_password == 1) {
               this.router.navigate(['voter-change-password']);
+            } else {
+              this.getCandidate();
+              this.isLoading = false;
             }
-          } else {
-            this.getCandidate();
-            this.isLoading = false;
           }
         },
         error => console.log('Error', error)
       );
   }
-  
+
   all_votes = []
   candidates: any[] = []
   groupedData: any[] = []
@@ -157,36 +157,36 @@ export class VoteComponent implements OnInit {
     this.all_votes.forEach(element => {
       this.can_vote.push(element.candidate)
     });
-    
+
     this.hasClicked = (this.all_votes.length !== 0) ? true : false;
   }
 
   can_vote = [];
 
   onSubmit() {
-    this.isLoading =true;
+    this.isLoading = true;
     this.hasClicked = false;
     //Send data to server
     this.voterService.submitVotes(this.can_vote)
-    .subscribe(
-      success => {
-        if (success.status) {
-          //Success
-          this.isLoading = false;
-          this.hasSuccess = true;
-          this.hasSuccessMessage = success.message
-          this.all_votes = [];
-          this.can_vote = [];
-          this.timeout.displaySuccessTimeout();
-        } else {
-          this.isLoading = false;
-          this.hasError = true;
-          this.hasErrorMessage = success.message
-          this.timeout.displayErrorTimeout();
-        }
-      },
-      error => console.error('Error', error)
-    );
+      .subscribe(
+        success => {
+          if (success.status) {
+            //Success
+            this.isLoading = false;
+            this.hasSuccess = true;
+            this.hasSuccessMessage = success.message
+            this.all_votes = [];
+            this.can_vote = [];
+            this.timeout.displaySuccessTimeout();
+          } else {
+            this.isLoading = false;
+            this.hasError = true;
+            this.hasErrorMessage = success.message
+            this.timeout.displayErrorTimeout();
+          }
+        },
+        error => console.error('Error', error)
+      );
   }
 
   canSubmit() {
